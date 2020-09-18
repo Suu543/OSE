@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/jos50275266/OSE#readme",
   "dependencies": {
+    "aws-sdk": "^2.755.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
