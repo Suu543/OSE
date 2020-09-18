@@ -1,5 +1,4 @@
 const JWT = require("jsonwebtoken");
-const validator = require("validator");
 const bcrypt = require("bcryptjs");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
@@ -20,11 +19,6 @@ const userSchema = new mongoose.Schema({
     trim: true,
     maxlength: 32,
     required: true,
-    validate: (value) => {
-      if (!validator.isEmail(value)) {
-        throw new Error({ error: "Invalid Email Address" });
-      }
-    },
   },
 
   salt: String,

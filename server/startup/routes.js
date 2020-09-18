@@ -13,5 +13,5 @@ module.exports = function (app) {
   app.use(cors());
   app.use(helmet());
 
-  app.use("/", userRoutes);
+  app.use("/users", userRoutes);
 };
