@@ -1,0 +1,36 @@
+{
+  "name": "ose",
+  "version": "1.0.0",
+  "description": "Our Sole Earth \u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[D\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[C\u001b[D\u001bThis service started to awaken the awareness that the earth where we live is sole thing.\u001b",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jos50275266/OSE.git"
+  },
+  "keywords": [
+    "Save",
+    "the",
+    "Earth"
+  ],
+  "author": "Yongsu Jeong",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jos50275266/OSE/issues"
+  },
+  "homepage": "https://github.com/jos50275266/OSE#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.6.1",
+    "helmet": "^4.1.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.5",
+    "morgan": "^1.10.0",
+    "validator": "^13.1.1"
+  }
+}
