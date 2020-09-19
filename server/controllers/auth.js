@@ -7,6 +7,7 @@ const {
   forgotPasswordEmailParams,
 } = require("../helpers/email");
 const AWS = require("aws-sdk");
+const expressJwt = require("express-jwt");
 const JWT = require("jsonwebtoken");
 const dotenv = require("dotenv");
 dotenv.config();
@@ -218,3 +219,9 @@ exports.resetPassword = (req, res) => {
     );
   }
 };
+
+exports.requireSignin = expressJwt({
+  // req.user
+  secret: process.env.JWT_KEY,
+  algorithms: ["RS256"],
+});
