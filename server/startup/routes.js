@@ -10,8 +10,8 @@ module.exports = function (app) {
   app.use(express.json({ limit: "5mb", type: "application/json" }));
   app.use(express.urlencoded({ extended: false }));
   app.use(morgan("dev"));
-  app.use(cors());
   app.use(helmet());
+  app.use(cors());
 
   app.use("/users", userRoutes);
 };

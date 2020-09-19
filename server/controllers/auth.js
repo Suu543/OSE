@@ -52,7 +52,7 @@ exports.signup = async (req, res) => {
       .catch((error) => {
         console.log("Registration Error", error);
         return res.status(400).json({
-          message: `We could not verify your email. Please try again...`,
+          error: `We could not verify your email. Please try again...`,
         });
       });
   } catch (error) {
@@ -81,7 +81,7 @@ exports.activateSignup = async (req, res) => {
       await user.save();
       return res
         .status(200)
-        .json({ message: "Registration Success. Please Login..." });
+        .json({ message: "Registration Success. Please Signin..." });
     } catch (error) {
       return res.status(401).json({
         error: "Error Saving User in DB. Please Try Again...",
@@ -106,7 +106,10 @@ exports.signin = async (req, res) => {
 
     return res.send({ user, token });
   } catch (error) {
-    return res.status(400).send(error);
+    return res.status(400).json({
+      error:
+        "User with that email does not exist. Please Signup or Signin with valid email and password...",
+    });
   }
 };
 

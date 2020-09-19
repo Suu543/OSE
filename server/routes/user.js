@@ -16,7 +16,7 @@ const auth = require("../middleware/auth");
 const router = express.Router();
 
 router.post("/signup", signup);
-router.post("/signup/activation", activateSignup);
+router.post("/account-activation", activateSignup);
 router.post("/signin", signin);
 router.put("/forgot-password", forgotPassword);
 router.put("/reset-password", resetPassword);
