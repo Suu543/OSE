@@ -4,7 +4,7 @@ const helmet = require("helmet");
 const cors = require("cors");
 
 // Routes
-const userRoutes = require("../routes/user");
+const authRoutes = require("../routes/auth");
 
 module.exports = function (app) {
   app.use(express.json({ limit: "5mb", type: "application/json" }));
@@ -13,5 +13,5 @@ module.exports = function (app) {
   app.use(helmet());
   app.use(cors());
 
-  app.use("/users", userRoutes);
+  app.use("/auth", authRoutes);
 };

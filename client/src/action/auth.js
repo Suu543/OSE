@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const signup = async (signupData) => {
   let response = await axios.post(
-    `${process.env.REACT_APP_API}/users/signup`,
+    `${process.env.REACT_APP_API}/auth/signup`,
     signupData
   );
 
@@ -11,7 +11,7 @@ export const signup = async (signupData) => {
 
 export const signin = async (signinData) => {
   let response = await axios.post(
-    `${process.env.REACT_APP_API}/users/signin`,
+    `${process.env.REACT_APP_API}/auth/signin`,
     signinData
   );
 
@@ -20,7 +20,7 @@ export const signin = async (signinData) => {
 
 export const accountActivation = async (token) => {
   let response = await axios.post(
-    `${process.env.REACT_APP_API}/users/account-activation`,
+    `${process.env.REACT_APP_API}/auth/account-activation`,
     token
   );
 
