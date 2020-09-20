@@ -4,24 +4,40 @@ const dotenv = require("dotenv");
 
 dotenv.config();
 
-const auth = async (req, res, next) => {
-  const token = req.header("Authorization").replace("Bearer ", "");
-  const data = JWT.verify(token, process.env.JWT_KEY);
+exports.auth = async (req, res, next) => {
+  if (req.header("Authorization")) {
+    const token = req.header("Authorization").replace("Bearer ", "");
+    const data = JWT.verify(token, process.env.JWT_KEY);
 
-  try {
-    const user = await User.findOne({ _id: data._id, "tokens.token": token });
-    if (!user) {
-      throw new Error({ error: "User Not Found or Not Valid Token" });
+    try {
+      const user = await User.findOne({ _id: data._id, "tokens.token": token });
+      if (!user) {
+        throw new Error({ error: "User Not Found or Not Valid Token" });
+      }
+
+      req.user = user;
+      req.token = token;
+      next();
+    } catch (error) {
+      return res
+        .status(401)
+        .send({ error: "Not Authorized to access this resource" });
     }
-
-    req.user = user;
-    req.token = token;
-    next();
-  } catch (error) {
-    return res
-      .status(401)
-      .send({ error: "Not Authorized to access this resource" });
+  } else {
+    return res.status(401).send({ error: "Token has not been provided..." });
   }
 };
 
-module.exports = auth;
+exports.admin = (req, res, next) => {
+  const user = req.user.role;
+  console.log("req.user", req.user);
+
+  if (user !== "admin") {
+    return res.status(400).json({
+      error: "Admin Resource. Access Denied...",
+    });
+  }
+
+  req.profile = req.user;
+  next();
+};

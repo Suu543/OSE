@@ -1,18 +1,51 @@
 const User = require("../models/User");
 
-exports.read = async (req, res) => {
-  try {
-    const userId = req.params.id;
-    const user = await User.findOne({ _id: userId });
-
-    user.password = undefined;
-    user.tokens = undefined;
-    user.resetPasswordLink = undefined;
-
-    return res.status(200).json(user);
-  } catch (error) {
+exports.read = (req, res) => {
+  if (!req.user) {
     console.log("Read Error", error);
 
+    return res.status(400).json({
+      error: "User Not Found...",
+    });
+  }
+
+  let user = req.user;
+
+  user.password = undefined;
+  user.tokens = undefined;
+  user.resetPasswordLink = undefined;
+
+  return res.status(200).json(user);
+};
+
+exports.update = async (req, res) => {
+  // console.log("UPDATE USER - req.user", req.user, "UPDATE DATA", req.body);
+  try {
+    // console.log("req.user", req.user._id);
+    const { name, password } = req.body;
+
+    const user = await User.findById(req.user._id);
+
+    if (!name && !password) {
+      return res.status(400).json({
+        error: "name or password required...",
+      });
+    }
+
+    if (name) {
+      user.name = name;
+    }
+
+    if (password) {
+      user.password = password;
+    }
+
+    await user.save();
+
+    return res.status(200).json({
+      message: "Successfully update your name and password!",
+    });
+  } catch (error) {
     return res.status(400).json({
       error: "User Not Found...",
     });

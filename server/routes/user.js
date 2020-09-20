@@ -1,10 +1,12 @@
 const express = require("express");
 const router = express.Router();
 
-const { requireSignin } = require("../controllers/auth");
-const { read } = require("../controllers/user");
+const { auth, admin } = require("../middleware/auth");
+const { read, update } = require("../controllers/user");
 
 // http://localhost:8000/users/user/5f665c37c1cce1641071b8fc
-router.get("/user/:id", requireSignin, read);
+router.get("/user/:id", auth, read);
+router.put("/user/update/:id", auth, admin, update);
+// router.put("/admin/update", auth, admin, update);
 
 module.exports = router;
