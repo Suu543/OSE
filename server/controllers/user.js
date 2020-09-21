@@ -49,8 +49,6 @@ exports.update = async (req, res) => {
     // });
 
     return res.status(200).send(response);
-
-    return res.status(200).send(response);
   } catch (error) {
     return res.status(400).json({
       error: "User Not Found...",

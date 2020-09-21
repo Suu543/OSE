@@ -154,7 +154,7 @@ exports.forgotPassword = async (req, res) => {
     }
 
     const token = JWT.sign(
-      { name: user.name },
+      { _id: user._id, name: user.name },
       process.env.JWT_RESET_PASSWORD,
       { expiresIn: "10m" }
     );

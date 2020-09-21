@@ -97,9 +97,15 @@ const Signup = () => {
       <div className="col-md-6 offset-md-3">
         <ToastContainer />
         {isAuth() ? <Redirect to="/" /> : null}
-        {JSON.stringify({ name, email, password })}
         <h1 className="p-5">Signup</h1>
         {signupForm()}
+        <br />
+        <Link
+          to="/auth/password/forgot"
+          className="btn btn-sm btn-outline-danger"
+        >
+          Forgot Password
+        </Link>
       </div>
     </Layout>
   );

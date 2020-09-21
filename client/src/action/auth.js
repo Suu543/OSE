@@ -67,3 +67,21 @@ export const updateAdminProfile = async (id, data, token) => {
 
   return response;
 };
+
+export const forgotPassword = async (email) => {
+  let response = await axios.put(
+    `${process.env.REACT_APP_API}/auth/forgot-password`,
+    email
+  );
+
+  return response;
+};
+
+export const resetPassword = async (data) => {
+  let response = await axios.put(
+    `${process.env.REACT_APP_API}/auth/reset-password`,
+    data
+  );
+
+  return response;
+};

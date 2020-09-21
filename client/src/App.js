@@ -4,7 +4,11 @@ import Layout from "./core/Layout";
 const App = () => {
   return (
     <Layout>
-      <h1>Hello React</h1>
+      <div className="col-md-6 offset-md-3">
+        <h1>MERN Authentication Boilerplate</h1>
+        <hr />
+        
+      </div>
     </Layout>
   );
 };
