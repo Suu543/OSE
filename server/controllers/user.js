@@ -25,8 +25,10 @@ exports.update = async (req, res) => {
     const { name, password } = req.body;
 
     const user = await User.findById(req.user._id);
+    console.log(name);
+    console.log(password);
 
-    if (!name && !password) {
+    if (name === undefined && password === undefined) {
       return res.status(400).json({
         error: "name or password required...",
       });
@@ -40,11 +42,15 @@ exports.update = async (req, res) => {
       user.password = password;
     }
 
-    await user.save();
+    let response = await user.save();
 
-    return res.status(200).json({
-      message: "Successfully update your name and password!",
-    });
+    // return res.status(200).json({
+    //   message: "Successfully update your name and password!",
+    // });
+
+    return res.status(200).send(response);
+
+    return res.status(200).send(response);
   } catch (error) {
     return res.status(400).json({
       error: "User Not Found...",

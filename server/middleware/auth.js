@@ -7,9 +7,9 @@ dotenv.config();
 exports.auth = async (req, res, next) => {
   if (req.header("Authorization")) {
     const token = req.header("Authorization").replace("Bearer ", "");
-    const data = JWT.verify(token, process.env.JWT_KEY);
 
     try {
+      const data = await JWT.verify(token, process.env.JWT_KEY);
       const user = await User.findOne({ _id: data._id, "tokens.token": token });
       if (!user) {
         throw new Error({ error: "User Not Found or Not Valid Token" });

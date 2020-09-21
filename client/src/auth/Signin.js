@@ -6,7 +6,7 @@ import { authenticate, isAuth } from "./helpers";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
 
-const Signup = ({ history }) => {
+const Signin = ({ history }) => {
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -100,4 +100,4 @@ const Signup = ({ history }) => {
   );
 };
 
-export default Signup;
+export default Signin;
