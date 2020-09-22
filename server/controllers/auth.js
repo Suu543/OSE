@@ -258,10 +258,6 @@ exports.googleLogin = async (req, res) => {
           console.log("saved", savedUser);
 
           if (savedUser) {
-            // const token = jwt.sign({ _id: user._id }, process.env.JWT_KEY, {
-            //   expiresIn: "1d",
-            // });
-
             const token = await savedUser.generateAuthToken();
 
             const { _id, email, password, role } = savedUser;
@@ -286,7 +282,6 @@ exports.googleLogin = async (req, res) => {
 exports.facebookLogin = async (req, res) => {
   console.log("FACEBOOK LOGIN REQ BODY", req.body);
   const { userID, accessToken } = req.body;
-  // 2.11
   const url = `https://graph.facebook.com/v8.0/${userID}/?fields=id,name,email&access_token=${accessToken}`;
 
   try {
@@ -338,15 +333,4 @@ exports.facebookLogin = async (req, res) => {
       error: "Facebook Login Failed... Try Again...",
     });
   }
-
-  // return (
-  //   fetch(url, {
-  //     method: "GET",
-  //   })
-  //     .then((response) => response.json())
-  //     // .then(response => console.log(response))
-  //     .then((response) => {
-  //       const { email, name } = response;
-  //     })
-  // );
 };

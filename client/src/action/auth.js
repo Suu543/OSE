@@ -85,12 +85,3 @@ export const resetPassword = async (data) => {
 
   return response;
 };
-
-// export const googleLogin = (idToken) => {
-//   let response = axios.post(`${process.env.REACT_APP_API}/auth/google-login`, {
-//     idToken,
-//   });
-
-//   console.log("resonse", response);
-//   return response;
-// };
