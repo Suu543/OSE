@@ -9,6 +9,7 @@ const {
   forgotPassword,
   resetPassword,
   googleLogin,
+  facebookLogin,
 } = require("../controllers/auth");
 
 // Middleware
@@ -30,5 +31,6 @@ router.post("/me/logoutall", auth, multiLogout);
 
 //  Google and Facebook
 router.post("/google-login", googleLogin);
+router.post("/facebook-login", facebookLogin);
 
 module.exports = router;
