@@ -8,6 +8,7 @@ const {
 } = require("../helpers/email");
 const AWS = require("aws-sdk");
 const JWT = require("jsonwebtoken");
+const { OAuth2Client } = require("google-auth-library");
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -216,5 +217,70 @@ exports.resetPassword = (req, res) => {
         }
       }
     );
+  }
+};
+
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+exports.googleLogin = async (req, res) => {
+  const { idToken } = req.body;
+  try {
+    let response = await client.verifyIdToken({
+      idToken,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+    console.log("response", response);
+
+    const { email_verified, name, email } = response.payload;
+    if (email_verified) {
+      let user = await User.findOne({ email });
+      console.log("user", user);
+      if (user) {
+        try {
+          // const token = jwt.sign({ _id: user._id }, process.env.JWT_KEY, {
+          //   expiresIn: "1d",
+          // });
+
+          const token = await user.generateAuthToken();
+          const { _id, email, name, role } = user;
+
+          return res.status(200).json({
+            token,
+            user: { _id, email, name, role },
+          });
+        } catch (error) {
+          return res.status(401).json({
+            error: "Google Login Failed...",
+          });
+        }
+      } else {
+        try {
+          let password = email + process.env.JWT_KEY;
+          const user = new User({ name, email, password });
+          const savedUser = await user.save();
+          console.log("saved", savedUser);
+
+          if (savedUser) {
+            // const token = jwt.sign({ _id: user._id }, process.env.JWT_KEY, {
+            //   expiresIn: "1d",
+            // });
+
+            const token = await savedUser.generateAuthToken();
+
+            const { _id, email, password, role } = savedUser;
+
+            return res.status(200).json({
+              token,
+              user: { _id, email, password, role },
+            });
+          }
+        } catch (error) {
+          return res.status(401).json({
+            error: "Failed to Signup with Google...",
+          });
+        }
+      }
+    }
+  } catch (error) {
+    console.log("error", error);
   }
 };

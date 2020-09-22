@@ -11,6 +11,7 @@ exports.auth = async (req, res, next) => {
     try {
       const data = await JWT.verify(token, process.env.JWT_KEY);
       const user = await User.findOne({ _id: data._id, "tokens.token": token });
+      console.log("user", user);
       if (!user) {
         throw new Error({ error: "User Not Found or Not Valid Token" });
       }

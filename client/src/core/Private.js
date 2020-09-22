@@ -30,11 +30,11 @@ const Private = ({ history }) => {
         console.log("error", error);
         console.log("PRIVATE PROFILE UPDATE ERROR", error.response.data.error);
         // console.log("error.stats", error.response.status);
-        if (error.response.status === 401) {
-          signout(() => {
-            history.push("/");
-          });
-        }
+        // if (error.response.status === 401) {
+        //   signout(() => {
+        //     history.push("/");
+        //   });
+        // }
       }
     };
 

@@ -1,6 +1,8 @@
 const User = require("../models/User");
 
 exports.read = (req, res) => {
+  console.log("req.user", req.user);
+
   if (!req.user) {
     console.log("Read Error", error);
 
@@ -21,7 +23,7 @@ exports.read = (req, res) => {
 exports.update = async (req, res) => {
   // console.log("UPDATE USER - req.user", req.user, "UPDATE DATA", req.body);
   try {
-    // console.log("req.user", req.user._id);
+    console.log("req.user", req.user._id);
     const { name, password } = req.body;
 
     const user = await User.findById(req.user._id);
