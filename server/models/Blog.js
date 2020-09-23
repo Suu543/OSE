@@ -38,10 +38,10 @@ const blogSchema = new mongoose.Schema(
       default: Date.now,
     },
 
-    categories: [
+    topics: [
       {
         type: ObjectId,
-        ref: "Category",
+        ref: "Topic",
       },
     ],
 
