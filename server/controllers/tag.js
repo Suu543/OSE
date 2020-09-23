@@ -22,9 +22,15 @@ exports.removeTag = async (req, res) => {
   const { slug } = req.params;
 
   try {
-    await Tag.findOneAndRemove({ slug });
-    return res.status(200).json({
-      message: `${slug} is successfully deleted...`,
+    let removedTag = await Tag.findOneAndRemove({ slug });
+    if (removedTag) {
+      return res.status(200).json({
+        message: `${slug} is successfully deleted...`,
+      });
+    }
+
+    return res.status(404).json({
+      error: `${slug} tag not exist...`,
     });
   } catch (error) {
     return res.status(404).json({
