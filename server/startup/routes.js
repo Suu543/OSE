@@ -7,6 +7,7 @@ const cors = require("cors");
 const authRoutes = require("../routes/auth");
 const userRoutes = require("../routes/user");
 const tagRoutes = require("../routes/tag");
+const categoryRoutes = require("../routes/category");
 
 module.exports = function (app) {
   app.use(express.json({ limit: "5mb", type: "application/json" }));
@@ -18,4 +19,5 @@ module.exports = function (app) {
   app.use("/", authRoutes);
   app.use("/", userRoutes);
   app.use("/", tagRoutes);
+  app.use("/", categoryRoutes);
 };

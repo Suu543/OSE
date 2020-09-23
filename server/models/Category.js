@@ -5,6 +5,7 @@ const categorySchema = new mongoose.Schema(
     slug: {
       type: String,
       trim: true,
+      unique: true,
       required: true,
       maxlength: 32,
     },
@@ -18,4 +19,4 @@ const categorySchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Tag", categorySchema);
+module.exports = mongoose.model("Category", categorySchema);
