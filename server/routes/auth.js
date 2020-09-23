@@ -15,14 +15,33 @@ const {
 // Middleware
 const { auth } = require("../middleware/auth");
 
+// Validators
+const { runValidation } = require("../validators");
+const {
+  userSignupValidator,
+  userSigninValidator,
+  forgotPasswordValidator,
+  resetPasswordValidator,
+} = require("../validators/auth");
+
 const router = express.Router();
 
-router.post("/signup", signup);
+router.post("/signup", userSignupValidator, runValidation, signup);
 router.post("/account-activation", activateSignup);
-router.post("/signin", signin);
+router.post("/signin", userSigninValidator, runValidation, signin);
 // Reset Password
-router.put("/forgot-password", forgotPassword);
-router.put("/reset-password", resetPassword);
+router.put(
+  "/forgot-password",
+  forgotPasswordValidator,
+  runValidation,
+  forgotPassword
+);
+router.put(
+  "/reset-password",
+  resetPasswordValidator,
+  runValidation,
+  resetPassword
+);
 
 // Logout
 router.get("/me", auth, me);
