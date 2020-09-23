@@ -194,7 +194,7 @@ exports.createBlog = async (req, res) => {
         blog.title = title;
         blog.slug = slugify(title).toLowerCase();
         blog.body = body;
-        blog.excerpt = excerpt;
+        blog.excerpt = smartTrim(excerpt, 60, " ", "...");
         blog.topics = topics && topics.split(",");
         blog.tags = tags && blogTags;
         blog.references = blogRefs;
