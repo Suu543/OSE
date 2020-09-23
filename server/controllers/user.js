@@ -1,8 +1,6 @@
 const User = require("../models/User");
 
 exports.read = (req, res) => {
-  console.log("req.user", req.user);
-
   if (!req.user) {
     console.log("Read Error", error);
 

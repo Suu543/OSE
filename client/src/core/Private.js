@@ -29,12 +29,12 @@ const Private = ({ history }) => {
       } catch (error) {
         console.log("error", error);
         console.log("PRIVATE PROFILE UPDATE ERROR", error.response.data.error);
-        // console.log("error.stats", error.response.status);
-        // if (error.response.status === 401) {
-        //   signout(() => {
-        //     history.push("/");
-        //   });
-        // }
+        console.log("error.stats", error.response.status);
+        if (error.response.status === 401) {
+          signout(() => {
+            history.push("/");
+          });
+        }
       }
     };
 

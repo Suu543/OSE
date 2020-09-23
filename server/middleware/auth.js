@@ -11,7 +11,7 @@ exports.auth = async (req, res, next) => {
     try {
       const data = await JWT.verify(token, process.env.JWT_KEY);
       const user = await User.findOne({ _id: data._id, "tokens.token": token });
-      console.log("user", user);
+
       if (!user) {
         throw new Error({ error: "User Not Found or Not Valid Token" });
       }
@@ -31,7 +31,6 @@ exports.auth = async (req, res, next) => {
 
 exports.admin = (req, res, next) => {
   const user = req.user.role;
-  console.log("req.user", req.user);
 
   if (user !== "admin") {
     return res.status(400).json({

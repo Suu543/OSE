@@ -106,6 +106,9 @@ exports.signin = async (req, res) => {
     }
 
     const token = await user.generateAuthToken();
+    user.resetPasswordLink = "";
+    user.password = "";
+    user.tokens = "";
 
     return res.send({ user, token });
   } catch (error) {
