@@ -298,3 +298,18 @@ exports.removeBlog = async (req, res) => {
     return res.status(400).json({ error });
   }
 };
+
+exports.findByTopic = async (req, res) => {
+  const slug = req.params.topic.toLowerCase();
+
+  try {
+    const refTopic = await Topic.findOne({ slug });
+    const blogs = await Blog.find({ topics: { $in: refTopic } })
+      .populate("topics", "title")
+      .populate("tags", "title");
+
+    return res.status(200).json(blogs);
+  } catch (error) {
+    return res.status(400).json({ error });
+  }
+};

@@ -8,6 +8,7 @@ const authRoutes = require("../routes/auth");
 const userRoutes = require("../routes/user");
 const tagRoutes = require("../routes/tag");
 const topicRoutes = require("../routes/topic");
+const blogRoutes = require("../routes/blog");
 
 module.exports = function (app) {
   app.use(express.json({ limit: "5mb", type: "application/json" }));
@@ -20,4 +21,5 @@ module.exports = function (app) {
   app.use("/", userRoutes);
   app.use("/", tagRoutes);
   app.use("/", topicRoutes);
+  app.use("/", blogRoutes);
 };
