@@ -9,11 +9,17 @@ const topicSchema = new mongoose.Schema(
       required: true,
       maxlength: 32,
     },
+
     name: {
       type: String,
       trim: true,
       required: true,
       maxlength: 32,
+    },
+
+    image: {
+      url: String,
+      key: String,
     },
   },
   { timestamps: true }

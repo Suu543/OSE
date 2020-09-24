@@ -1,21 +1,69 @@
+const slugify = require("slug");
+const dotenv = require("dotenv");
+const fileType = require("file-type");
+const { v4: uuidv4 } = require("uuid");
+const AWS = require("aws-sdk");
+
 const Topic = require("../models/Topic");
-const slugify = require("slugify");
+const Blog = require("../models/Blog");
+const Reference = require("../models/Reference");
+
+dotenv.config();
+
+const s3 = new AWS.S3({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_REGION,
+});
 
 exports.createTopic = async (req, res) => {
-  const { name } = req.body;
-  const slug = slugify(name).toLowerCase();
-  const topic = new Topic({ name, slug });
+  const { name, image } = req.body;
 
-  try {
-    await topic.save();
-    return res.status(201).json({
-      message: `${name} topic is successfully created...`,
+  if (!name || name.length < 1)
+    return res.json({ error: "name is not defined..." });
+
+  if (!image || image.length < 1)
+    return res.json({ error: "image is not defined..." });
+
+  const base64Data = new Buffer.from(
+    image.replace(/^data:image\/\w+;base64,/, ""),
+    "base64"
+  );
+
+  const slug = slugify(name).toLowerCase();
+  const type = image.split(";")[0].split("/")[1];
+  const params = {
+    Bucket: "ose",
+    Key: `image/${uuidv4()}.${type}`,
+    Body: base64Data,
+    ACL: "public-read",
+    ContentEncoding: "base64",
+    ContentType: `image/${type}`,
+  };
+
+  s3.upload(params, async (err, data) => {
+    let newTopic = new Topic({
+      name: name.trim(),
+      slug,
     });
-  } catch (error) {
-    return res.status(409).json({
-      error: `Failed to create ${name} topic...`,
-    });
-  }
+
+    if (err) res.status(400).json({ error: "Upload to S3 Failed..." });
+    console.log("AWS UPOLOAD RES DATA", data);
+
+    newTopic.image.url = data.Location;
+    newTopic.image.key = data.key;
+
+    try {
+      await newTopic.save();
+      return res.status(201).json({
+        message: `${name} topic is successfully created...`,
+      });
+    } catch (error) {
+      return res.status(409).json({
+        error: `Failed to create ${name} topic...`,
+      });
+    }
+  });
 };
 
 exports.removeTopic = async (req, res) => {

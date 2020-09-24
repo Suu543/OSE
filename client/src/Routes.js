@@ -14,6 +14,9 @@ import Reset from "./auth/Reset";
 import Private from "./core/Private";
 import Admin from "./core/Admin";
 
+// Topic
+import CreateTopic from "./topic/CreateTopic";
+
 const Routes = () => {
   return (
     <BrowserRouter>
@@ -24,6 +27,7 @@ const Routes = () => {
         <Route path="/auth/activate/:token" exact component={Activate} />
         <PrivateRoute path="/private" exact component={Private} />
         <AdminRoute path="/admin" exact component={Admin} />
+        <AdminRoute path="/admin/topic/create" exact component={CreateTopic} />
         <Route path="/auth/password/forgot" exact component={Forgot} />
         <Route path="/auth/password/reset/:token" exact component={Reset} />
       </Switch>
