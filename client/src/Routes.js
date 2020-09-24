@@ -17,6 +17,9 @@ import Admin from "./core/Admin";
 // Topic
 import CreateTopic from "./topic/CreateTopic";
 
+// Blog
+import CreateBlog from "./blog/CreateBlog";
+
 const Routes = () => {
   return (
     <BrowserRouter>
@@ -28,6 +31,7 @@ const Routes = () => {
         <PrivateRoute path="/private" exact component={Private} />
         <AdminRoute path="/admin" exact component={Admin} />
         <AdminRoute path="/admin/topic/create" exact component={CreateTopic} />
+        <AdminRoute path="/admin/blog/create" exact component={CreateBlog} />
         <Route path="/auth/password/forgot" exact component={Forgot} />
         <Route path="/auth/password/reset/:token" exact component={Reset} />
       </Switch>

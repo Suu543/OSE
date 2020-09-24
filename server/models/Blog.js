@@ -9,11 +9,9 @@ const blogSchema = new mongoose.Schema(
       index: true,
     },
 
-    thumbnail: {
-      image: {
-        url: String,
-        key: String,
-      },
+    image: {
+      url: String,
+      key: String,
     },
 
     title: {

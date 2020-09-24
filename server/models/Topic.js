@@ -25,4 +25,8 @@ const topicSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Topic", topicSchema);
+const Topic = mongoose.model("Topic", topicSchema);
+
+module.exports = {
+  Topic,
+};

@@ -4,9 +4,9 @@ const fileType = require("file-type");
 const { v4: uuidv4 } = require("uuid");
 const AWS = require("aws-sdk");
 
-const Topic = require("../models/Topic");
-const Blog = require("../models/Blog");
-const Reference = require("../models/Reference");
+const { Topic } = require("../models/Topic");
+const { Blog } = require("../models/Blog");
+const { Reference } = require("../models/Reference");
 
 dotenv.config();
 

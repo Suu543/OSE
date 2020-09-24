@@ -17,3 +17,12 @@ export const createTopic = async (data, token) => {
     return error;
   }
 };
+
+export const getTopics = async () => {
+  try {
+    const response = await axios.get(`${process.env.REACT_APP_API}/topics`);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};

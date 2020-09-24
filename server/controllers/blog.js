@@ -10,12 +10,11 @@ const path = require("path");
 dotenv.config();
 
 const { smartTrim } = require("../helpers/smartTrim");
-const { Work } = require("../models/Blog");
+const { Blog } = require("../models/Blog");
 const { Tag } = require("../models/Tag");
 const { Topic } = require("../models/Topic");
 const { Reference } = require("../models/Reference");
-const Blog = require("../models/Blog");
-const { worker } = require("cluster");
+// const { worker } = require("cluster");
 
 const s3 = new AWS.S3({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
@@ -42,16 +41,17 @@ exports.createBlog = async (req, res) => {
 
     // 요청으로 들어온 태그 중 이미 생성된 태그와 그렇지 않을 태그를 구분 arrTagId에 이미 생성된 태그를 담고, splitedTags 에서 이미 생성된 태그를 제거
     allTags.forEach((tagFromDB) => {
-      if (splitedTags.find((tag) => tagFromDB.title == tag)) {
+      if (splitedTags.find((tag) => tagFromDB.name == tag)) {
         arrTagId.push(tagFromDB._id);
-        let idx = splitedTags.indexOf(tagFromDB.title);
+        let idx = splitedTags.indexOf(tagFromDB.name);
         splitedTags.splice(idx, 1);
       }
     });
 
     // 위 로직에서 이미 생성된 태그는 splitedTags 배열에서 다 제거 되었기 때문에 splitedTags 배열에 있는 태그를 생성하도록 job Query에 요청 할당
-    splitedTags.forEach((title) => {
-      const newTag = new Tag({ title });
+    splitedTags.forEach((name) => {
+      const slug = slugify(name).toLowerCase();
+      const newTag = new Tag({ name, slug });
       jobQuerys.push(newTag.save());
     });
 
@@ -103,15 +103,16 @@ exports.createBlog = async (req, res) => {
         return res.status(400).json({ error: err });
       }
 
+      console.log("First");
       const {
         title,
         excerpt,
         body,
         topics,
-        categories,
         mime,
-        thumbnail,
+        image,
         references,
+        tags,
       } = fields;
 
       if (!title || title.length < 2) {
@@ -145,15 +146,15 @@ exports.createBlog = async (req, res) => {
         });
       }
 
-      if (!thumbnail || thumbnail.length < 1) {
+      if (!image || image.length < 1) {
         return res.json({
-          error: "Please Select Main Thumbnail For this Work...",
+          error: "Please Select Main image For this Work...",
         });
       }
 
-      let imageData = thumbnail;
-      if (thumbnail.substr(0, 7) === "base64,") {
-        imageData = thumbnail.substr(7, thumbnail.length);
+      let imageData = image;
+      if (image.substr(0, 7) === "base64,") {
+        imageData = image.substr(7, image.length);
       }
 
       const buffer = Buffer.from(imageData, "base64");
@@ -183,13 +184,16 @@ exports.createBlog = async (req, res) => {
 
       s3.putObject(params, async (err, data) => {
         if (err) {
+          console.log("Second");
           return res.status(400).json({ error: "Upload to S3 Failed..." });
         }
 
+        console.log("Third");
+
         const url = `https://ose.s3-${process.env.AWS_REGION}.amazonaws.com/${key}`;
 
-        blog.thumbnail.url = url;
-        blog.thumbnail.key = key;
+        blog.image.url = url;
+        blog.image.key = key;
 
         blog.title = title;
         blog.slug = slugify(title).toLowerCase();
@@ -203,11 +207,13 @@ exports.createBlog = async (req, res) => {
           const newBlog = await blog.save();
           return res.status(200).json(newBlog);
         } catch (error) {
+          console.log("Fourth");
           return res.status(400).json({ error });
         }
       });
     });
   } catch (error) {
+    console.log("Fifth", error);
     return res.status(400).json({
       message: error.message || "Failed to upload image...",
     });
@@ -237,7 +243,7 @@ exports.uploadS3 = multer({
     key: function (req, file, cb) {
       const keyName = uuidv4();
       const extension = path.extname(file.originalname);
-      cb(null, `blogs/images/${keyName}${extension}`);
+      cb(null, `ose/blogBody/${keyName}${extension}`);
     },
   }),
 });
@@ -258,7 +264,7 @@ exports.upload = async (req, res) => {
 exports.removeBlog = async (req, res) => {
   const slug = req.params.slug;
 
-  const deleteThumbnail = async (key) => {
+  const deleteimage = async (key) => {
     const deletedParams = {
       Bucket: "ose",
       Key: `${key}`,
@@ -273,9 +279,9 @@ exports.removeBlog = async (req, res) => {
   try {
     let removedBlog = await Blog.findOneAndRemove({ slug });
     let removedReferences = removedBlog["references"];
-    let removedThumbnail = removedBlog["thumbnail"]["key"];
+    let removedimage = removedBlog["image"]["key"];
 
-    await deleteThumbnail(removedThumbnail);
+    await deleteimage(removedimage);
 
     removedReferences.map(async (ref) => {
       let deletedRef = await Reference.findByIdAndDelete({ _id: ref });

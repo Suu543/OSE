@@ -1,6 +1,6 @@
 import React from "react";
 import ReactQuill from "react-quill";
-import { imageUpload } from "../actions/blog";
+import { imageUpload } from "../action/blog";
 import "../../node_modules/react-quill/dist/quill.snow.css";
 
 const QuillFormats = [
