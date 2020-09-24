@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { createGlobalStyle } from "styled-components";
 import App from "./App";
 
 import Signup from "./auth/Signup";
@@ -20,9 +21,22 @@ import CreateTopic from "./topic/CreateTopic";
 // Blog
 import CreateBlog from "./blog/CreateBlog";
 
+const GlobalStyle = createGlobalStyle`
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    html,body {
+      font-size: 62.5%;
+    }
+  `;
+
 const Routes = () => {
   return (
     <BrowserRouter>
+      <GlobalStyle />
       <Switch>
         <Route path="/" exact component={App} />
         <Route path="/signup" exact component={Signup} />
