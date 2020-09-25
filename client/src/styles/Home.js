@@ -55,16 +55,10 @@ export const HomeBackground = styled.section`
   @keyframes animate {
     0% {
       background-position-x: 0;
-      transform: scale(1);
     }
 
-    50% {
-      background-position-x: 1500px;
-      transform: scale(1.5);
-    }
     100% {
-      background-position-x: 3000px;
-      transform: scale(2);
+      background-position-x: 1000px;
     }
   }
 `;

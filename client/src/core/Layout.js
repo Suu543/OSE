@@ -16,16 +16,16 @@ const Layout = ({ children, match, history }) => {
   const nav = () => (
     <Navbar open={open}>
       <NavbarLeft>
-        <li>
+        <h1>
           <Link to="/">OSE</Link>
-        </li>
-      </NavbarLeft>
+        </h1>
 
-      <NavbarRightHamburger open={open}>
-        <div></div>
-        <div></div>
-        <div></div>
-      </NavbarRightHamburger>
+        <NavbarRightHamburger open={open} onClick={() => setOpen(!open)}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </NavbarRightHamburger>
+      </NavbarLeft>
 
       <NavbarCenter open={open}>
         <li>

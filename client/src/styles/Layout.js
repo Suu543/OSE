@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
 export const Navbar = styled.nav`
-  min-height: 8vh;
-  max-height: 10vh;
+  height: 8vh;
   width: 100%;
   margin: auto;
   position: fixed;
@@ -11,61 +10,83 @@ export const Navbar = styled.nav`
   grid-template-columns: 3fr 6fr 3fr;
   background-color: white;
 
-  ul {
-    display: flex;
-    align-items: center;
-    list-style: none;
+  @media all and (max-width: 995px) {
+    grid-template-columns: 12fr;
+  }
+`;
 
-    li {
-      font-weight: 700;
+export const NavbarLeft = styled.section`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style: none;
 
-      a {
-        text-decoration: none;
-      }
+  h1 {
+    font-size: 5rem;
+    text-align: center;
+
+    a {
+      text-decoration: none;
+      color: #588a72;
     }
   }
 
   @media all and (max-width: 995px) {
-    grid-template-columns: 3fr 9fr;
+    display: grid;
+    grid-template-columns: 6fr 6fr;
   }
 `;
 
-export const NavbarLeft = styled.ul`
+export const NavbarCenter = styled.section`
   display: flex;
-  justify-content: center;
-
-  li {
-    font-size: 5rem;
-
-    a {
-      color: #588a72;
-    }
-  }
-`;
-
-export const NavbarCenter = styled.ul`
   justify-content: space-evenly;
   align-items: center;
+  list-style: none;
 
   li {
     font-size: 2rem;
 
     a {
+      text-decoration: none;
       color: black;
     }
   }
 
   @media all and (max-width: 995px) {
+    display: ${(props) => (props.open ? "flex" : "none")};
+    flex-direction: column;
+    margin-top: 1rem;
+    position: absolute;
+    left: 0;
+    top: 6.5vh;
+    z-index: 100;
+    width: 100%;
+    background: white;
+    animation: ${(props) => (props.open ? "fromLeft 0.6s ease-in-out" : "")};
+
     li {
-      display: ${(props) => (props.open ? "none" : "none")};
+      width: 100%;
+      padding: 1rem;
+      font-size: 1.5rem;
+    }
+
+    @keyframes fromLeft {
+      from {
+        left: 500px;
+      }
+
+      to {
+        left: 0;
+      }
     }
   }
 `;
 
-export const NavbarRight = styled.ul`
+export const NavbarRight = styled.section`
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  list-style: none;
 
   li {
     font-size: 2rem;
@@ -74,6 +95,7 @@ export const NavbarRight = styled.ul`
 
     a {
       color: black;
+      text-decoration: none;
     }
   }
 
@@ -95,9 +117,34 @@ export const NavbarRight = styled.ul`
 
   @media all and (max-width: 995px) {
     display: ${(props) => (props.open ? "flex" : "none")};
+    flex-direction: column;
+    position: absolute;
+    z-index: 100;
+    left: 0;
+    top: 28vh;
+    background: white;
+    width: 100%;
+    animation: ${(props) => (props.open ? "fromLeft 0.6s ease-in-out" : "")};
 
     li {
-      display: ${(props) => (props.open ? "flex" : "none")};
+      width: 100%;
+      padding: 1rem;
+      text-align: center;
+      font-size: 1.5rem;
+    }
+
+    button {
+      width: 50%;
+    }
+
+    @keyframes fromLeft {
+      from {
+        left: -500px;
+      }
+
+      to {
+        left: 0;
+      }
     }
   }
 `;
@@ -108,31 +155,28 @@ export const NavbarRightHamburger = styled.section`
   @media all and (max-width: 995px) {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
 
-    div {
+    span {
+      display: block;
       width: 3rem;
       font-weight: bolder;
-      padding: 0;
-      margin: 0;
       height: 4px;
       background: #2b1700;
       border-radius: 3px;
       margin-top: 7px;
-      margin-right: 30px;
+      transition: all ease 0.5s;
     }
 
-    :first-child {
-      transform: ${(props) =>
-        props.open ? "rotate(45deg) translate(7.5px, 7.5px)" : ""};
+    span:nth-child(1) {
+      transform: ${(props) => (props.open ? "rotate(360deg)" : "")};
     }
-    :nth-child(2n) {
-      width: 2.5rem;
-      display: ${(props) => (props.open ? "none" : "flex")};
-    }
-    :nth-child(3n) {
-      transform: ${(props) => (props.open ? "rotate(-45deg)" : "")};
+
+    span:nth-child(2) {
+      transition: ${(props) => (props.open ? "width" : "")};
+      width: ${(props) => (props.open ? "2rem" : "3rem")};
+      transform: ${(props) => (props.open ? "translateX(0.6rem)" : "")};
     }
   }
 `;
