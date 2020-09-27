@@ -9,6 +9,7 @@ export const Navbar = styled.nav`
   display: grid;
   grid-template-columns: 3fr 6fr 3fr;
   background-color: white;
+  box-shadow: 0 10px 6px -6px #777;
 
   @media all and (max-width: 995px) {
     grid-template-columns: 12fr;
@@ -62,7 +63,7 @@ export const NavbarCenter = styled.section`
     z-index: 100;
     width: 100%;
     background: white;
-    animation: ${(props) => (props.open ? "fromLeft 0.6s ease-in-out" : "")};
+    animation: ${(props) => (props.open ? "rightToLeft 0.6s ease-in-out" : "")};
 
     li {
       width: 100%;
@@ -70,7 +71,7 @@ export const NavbarCenter = styled.section`
       font-size: 1.5rem;
     }
 
-    @keyframes fromLeft {
+    @keyframes rightToLeft {
       from {
         left: 500px;
       }
@@ -117,10 +118,10 @@ export const NavbarRight = styled.section`
     position: absolute;
     z-index: 100;
     left: 0;
-    top: 30vh;
+    top: 29.5vh;
     background: white;
     width: 100%;
-    animation: ${(props) => (props.open ? "test 0.6s ease-in-out" : "")};
+    animation: ${(props) => (props.open ? "leftToRight 0.6s ease-in-out" : "")};
 
     li {
       width: 100%;
@@ -135,7 +136,7 @@ export const NavbarRight = styled.section`
       text-align: center;
     }
 
-    @keyframes test {
+    @keyframes leftToRight {
       from {
         left: -500px;
       }

@@ -63,7 +63,7 @@ export const HomeBackground = styled.section`
   }
 `;
 
-export const HomeTopSection = styled.article`
+export const HomeComponentsContainer = styled.article`
   position: relative;
   z-index: 5;
   top: 13vh;
@@ -151,4 +151,36 @@ export const HomeTopBodyRightElem = styled.section`
     width: 100%;
     height: 100%;
   }
+`;
+
+export const HomeTopicSection = styled.section`
+  width: 90%;
+  margin: auto;
+  margin-top: 8rem;
+  margin-bottom: 20vh;
+`;
+
+export const HomeTopicHeader = styled.h1`
+  width: 100%;
+  font-size: 4rem;
+  color: #47715d;
+  letter-spacing: 3px;
+  margin-bottom: 4rem;
+
+  span {
+    font-size: 6rem;
+  }
+`;
+
+export const HomeTopicWrapper = styled.section`
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+`;
+
+export const HomeTopicSlide = styled.div`
+  width: 300px;
+  height: 300px;
+  margin-left: 2rem;
+  background-size: cover;
 `;

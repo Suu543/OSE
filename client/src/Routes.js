@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
-import Home from "./Home";
+import Home from "./core/Home";
 
 import Signup from "./auth/Signup";
 import Signin from "./auth/Signin";
