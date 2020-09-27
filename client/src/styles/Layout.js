@@ -101,17 +101,13 @@ export const NavbarRight = styled.section`
 
   li:nth-child(2),
   button {
+    display: inline-block;
     background: #588a72;
     color: white;
     padding: 1rem;
-    border-radius: 10%;
-  }
-
-  button {
     font-size: 1.5rem;
     color: white;
     border: none;
-    display: inline-block;
     margin-left: 1rem;
   }
 
@@ -121,23 +117,25 @@ export const NavbarRight = styled.section`
     position: absolute;
     z-index: 100;
     left: 0;
-    top: 28vh;
+    top: 30vh;
     background: white;
     width: 100%;
-    animation: ${(props) => (props.open ? "fromLeft 0.6s ease-in-out" : "")};
+    animation: ${(props) => (props.open ? "test 0.6s ease-in-out" : "")};
 
     li {
       width: 100%;
       padding: 1rem;
-      text-align: center;
       font-size: 1.5rem;
     }
 
+    li:nth-child(2),
     button {
-      width: 50%;
+      width: 90%;
+      margin: 1rem auto;
+      text-align: center;
     }
 
-    @keyframes fromLeft {
+    @keyframes test {
       from {
         left: -500px;
       }
