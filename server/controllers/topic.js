@@ -17,10 +17,13 @@ const s3 = new AWS.S3({
 });
 
 exports.createTopic = async (req, res) => {
-  const { name, image } = req.body;
+  const { name, description, image } = req.body;
 
   if (!name || name.length < 1)
     return res.json({ error: "name is not defined..." });
+
+  if (!description || description.length < 0)
+    return res.json({ error: "description is not defined..." });
 
   if (!image || image.length < 1)
     return res.json({ error: "image is not defined..." });
@@ -45,6 +48,7 @@ exports.createTopic = async (req, res) => {
     let newTopic = new Topic({
       name: name.trim(),
       slug,
+      description,
     });
 
     if (err) res.status(400).json({ error: "Upload to S3 Failed..." });
@@ -66,19 +70,38 @@ exports.createTopic = async (req, res) => {
   });
 };
 
+exports.readTopic = async (req, res) => {
+  const { slug } = req.params;
+
+  try {
+    let singleTopic = await Topic.findOne({ slug });
+    if (!singleTopic) {
+      return res.status(404).json({
+        error: `${slug} topic not found...`,
+      });
+    }
+
+    return res.status(200).json(singleTopic);
+  } catch (error) {
+    return res.status(404).json({
+      error: `${slug} topic not found...`,
+    });
+  }
+};
+
 exports.removeTopic = async (req, res) => {
   const { slug } = req.params;
 
   try {
     let removedTopic = await Topic.findOneAndRemove({ slug });
-    if (removedTopic) {
-      return res.status(200).json({
-        message: `${slug} is successfully deleted...`,
+    if (!removedTopic) {
+      return res.status(404).json({
+        error: `${slug} topic not found...`,
       });
     }
 
-    return res.status(404).json({
-      error: `${slug} topic not exist...`,
+    return res.status(200).json({
+      message: `${slug} is successfully deleted...`,
     });
   } catch (error) {
     return res.status(404).json({

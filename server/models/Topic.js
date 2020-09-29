@@ -17,6 +17,11 @@ const topicSchema = new mongoose.Schema(
       maxlength: 32,
     },
 
+    description: {
+      type: String,
+      required: true,
+    },
+
     image: {
       url: String,
       key: String,
