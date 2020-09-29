@@ -4,8 +4,10 @@ import { getTopics } from "../action/topic";
 
 const Container = styled.section`
   width: 100%;
+  position: relative;
 `;
 
+/*
 const CardSliderContainer = styled.section`
   position: relative;
   &:before,
@@ -34,6 +36,88 @@ const CardSliderContainer = styled.section`
     );
   }
 `;
+*/
+
+const CardSliderContainer = styled.section`
+  position: relative;
+`;
+
+const CardLeftButton = styled.button`
+  display: inline-block;
+  width: auto;
+  background: #5c9175;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  z-index: 10;
+  top: 40%;
+  left: -10%;
+  opacity: 0.5;
+  border: none;
+  cursor: pointer;
+
+  :active {
+    outline: none;
+    border: none;
+    opacity: 1;
+  }
+
+  :focus {
+    outline: none;
+  }
+
+  :hover {
+    opacity: 1;
+  }
+
+  &:before {
+    content: "<";
+    color: white;
+    opacity: 1;
+    font-size: 3rem;
+    position: absolute;
+    top: -10%;
+    left: 15%;
+  }
+`;
+
+const CardRightButton = styled.button`
+  display: block;
+  width: auto;
+  background: #5c9175;
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  z-index: 10;
+  top: 40%;
+  left: 95%;
+  opacity: 0.5;
+  border: none;
+  cursor: pointer;
+
+  :active {
+    outline: none;
+    border: none;
+    opacity: 1;
+  }
+
+  :focus {
+    outline: none;
+  }
+
+  :hover {
+    opacity: 1;
+  }
+
+  &:before {
+    content: ">";
+    color: white;
+    font-size: 3rem;
+    position: absolute;
+    top: -10%;
+    left: 40%;
+  }
+`;
 
 const CardSlider = styled.section`
   position: relative;
@@ -45,7 +129,6 @@ const CardSlider = styled.section`
     display: block;
     width: 100%;
     height: 280px;
-    outline: 5px solid #61dafb;
     position: absolute;
     z-index: 5;
     top: 0;
@@ -105,14 +188,13 @@ const TopicSlider = () => {
         return { ...topic, index: idx };
       });
       setTopics([...topics, ...indexedResponse]);
-      setTopic(indexedResponse[0]);
+      setTopic(indexedResponse[1]);
     } catch (error) {
       console.log("error", error);
     }
   };
 
   const prevProperty = () => {
-    console.log("topic.index", topic.index);
     let newIndex = topic.index - 1;
     if (newIndex < 0) {
       newIndex = topics.length - 1;
@@ -131,15 +213,16 @@ const TopicSlider = () => {
       setTopic(topics[newIndex]);
     }
   };
+  //   <CardButton onClick={() => prevProperty()}>Prev</CardButton>
 
   return (
     <Container>
-      <button onClick={() => nextProperty()}>Next</button>
-      <button onClick={() => prevProperty()}>Prev</button>\
       <CardSliderContainer>
         <CardSlider>
+          <CardLeftButton onClick={() => prevProperty()}></CardLeftButton>
+          <CardRightButton onClick={() => nextProperty()}></CardRightButton>
           <CardSliderWrapper
-            idx={topic.index}
+            idx={topics.length > 0 && topic.index}
             dividedBy={topics.length * 100}
             length={topics.length}
           >

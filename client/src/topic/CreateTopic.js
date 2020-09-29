@@ -36,7 +36,7 @@ export const SuccessAlert = styled.article`
 const CreateCategoryContainer = styled.section`
   width: 100%;
   background: white;
-  margin-top: 10vh;
+  padding-top: 10vh;
 `;
 
 const CategoryCreateTitle = styled.h1`
@@ -153,7 +153,7 @@ const CreateTopic = () => {
 
         setTimeout(() => {
           window.location.reload();
-        }, 3000);
+        }, 1000);
       }
     } catch (error) {
       console.log("Category Create Error", error);
