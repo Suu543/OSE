@@ -97,12 +97,13 @@ const CreateTopic = () => {
   const [state, setState] = useState({
     name: "",
     image: "",
+    description: "",
     error: "",
     success: "",
   });
 
   const token = getCookie("token");
-  const { name, image, error, success } = state;
+  const { name, image, description, error, success } = state;
 
   const handleChange = (name) => (e) => {
     setState({
@@ -141,7 +142,7 @@ const CreateTopic = () => {
 
     e.preventDefault();
     try {
-      let data = { name, image };
+      let data = { name, description, image };
       const response = await createTopic(data, token);
       if (response.error) setState({ ...state, error: response.error });
       else {
@@ -165,10 +166,7 @@ const CreateTopic = () => {
       <CreateCategoryContainer>
         <CategoryCreateTitle>Create Topic</CategoryCreateTitle>
         <CategoryForm onSubmit={handleSubmit}>
-          <img
-            alt="Create Topic"
-            src="https://static.dribbble.com/users/1986212/screenshots/5156775/camera.gif"
-          />
+          <img alt="Create Topic" src="https://i.gifer.com/TFQU.gif" />
           <CategoryImageInput
             type="file"
             name="image"
@@ -180,7 +178,13 @@ const CreateTopic = () => {
             type="text"
             name="name"
             onChange={handleChange("name")}
-            placeholder="Topic name"
+            placeholder="Topic Name"
+          />
+          <CategoryTitleInput
+            type="text"
+            name="description"
+            onChange={handleChange("description")}
+            placeholder="Topic Description"
           />
           {error && <ErrorAlert style={{ width: "50%" }}>{error}</ErrorAlert>}
           {success && (

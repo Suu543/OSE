@@ -26,3 +26,15 @@ export const getTopics = async () => {
     return error;
   }
 };
+
+export const readTopic = async (slug) => {
+  try {
+    const response = await axios.get(
+      `${process.env.REACT_APP_API}/topic/${slug}`
+    );
+
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};

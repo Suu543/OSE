@@ -177,15 +177,3 @@ export const HomeTopicWrapper = styled.section`
   height: 100%;
   overflow: hidden;
 `;
-
-export const HomeTopicSlide = styled.div`
-  width: 250px;
-  height: 250px;
-  margin-left: 2rem;
-  background-size: cover;
-`;
-
-export const HomeTopicSlideName = styled.h1`
-  position: absolute;
-  left: 0;
-`;

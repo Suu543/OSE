@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { getTopics } from "../action/topic";
 
 const Container = styled.section`
@@ -7,7 +8,6 @@ const Container = styled.section`
   position: relative;
 `;
 
-/*
 const CardSliderContainer = styled.section`
   position: relative;
   &:before,
@@ -24,23 +24,15 @@ const CardSliderContainer = styled.section`
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 6;
-  }
-  &:after {
-    left: auto;
-    right: 0;
-    background: linear-gradient(
-      to left,
-      white 15%,
-      rgba(255, 255, 255, 0) 100%
-    );
+    z-index: 9;
   }
 `;
-*/
 
+/*
 const CardSliderContainer = styled.section`
   position: relative;
 `;
+*/
 
 const CardLeftButton = styled.button`
   display: inline-block;
@@ -139,11 +131,17 @@ const CardSlider = styled.section`
 const CardSliderWrapper = styled.section`
   display: flex;
   width: 100%;
+  z-index: 9;
   position: relative;
   transition: transform 400ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
   transform: translateX(
     ${(props) => `-${props.idx * (props.dividedBy / props.length)}%`}
   );
+
+  a {
+    text-decoration: none;
+    color: black;
+  }
 `;
 
 const Card = styled.section`
@@ -213,7 +211,6 @@ const TopicSlider = () => {
       setTopic(topics[newIndex]);
     }
   };
-  //   <CardButton onClick={() => prevProperty()}>Prev</CardButton>
 
   return (
     <Container>
@@ -228,14 +225,16 @@ const TopicSlider = () => {
           >
             {topics &&
               topics.map((t, i) => (
-                <Card topicIdx={topic.index} idx={t.index} index={i}>
-                  <CardImage>
-                    <img src={`${t.image.url}`} />
-                  </CardImage>
-                  <CardName>
-                    <h1>{t.slug}</h1>
-                  </CardName>
-                </Card>
+                <Link to={`/topics/${t.slug}`}>
+                  <Card topicIdx={topic.index} idx={t.index} index={i}>
+                    <CardImage>
+                      <img src={`${t.image.url}`} />
+                    </CardImage>
+                    <CardName>
+                      <h1>{t.name}</h1>
+                    </CardName>
+                  </Card>
+                </Link>
               ))}
           </CardSliderWrapper>
         </CardSlider>

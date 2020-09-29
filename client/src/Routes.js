@@ -17,6 +17,7 @@ import Admin from "./core/Admin";
 
 // Topic
 import CreateTopic from "./topic/CreateTopic";
+import ReadSingleTopic from "./topic/ReadSingleTopic";
 
 // Blog
 import CreateBlog from "./blog/CreateBlog";
@@ -41,6 +42,7 @@ const Routes = () => {
         <Route path="/" exact component={Home} />
         <Route path="/signup" exact component={Signup} />
         <Route path="/signin" exact component={Signin} />
+        <Route path="/topics/:slug" exact component={ReadSingleTopic} />
         <Route path="/auth/activate/:token" exact component={Activate} />
         <PrivateRoute path="/private" exact component={Private} />
         <AdminRoute path="/admin" exact component={Admin} />
