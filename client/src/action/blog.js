@@ -31,6 +31,16 @@ export const createBlog = async (formData, token) => {
   }
 };
 
+export const readBlog = async (slug) => {
+  try {
+    let response = await axios.get(`${process.env.REACT_APP_API}/blog/${slug}`);
+    return response.data;
+  } catch (error) {
+    console.log("error");
+    return error;
+  }
+};
+
 export const imageUpload = (formData) => {
   const response = axios.post(
     `${process.env.REACT_APP_API}/blog/upload`,

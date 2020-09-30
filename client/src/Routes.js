@@ -21,6 +21,7 @@ import ReadSingleTopic from "./topic/ReadSingleTopic";
 
 // Blog
 import CreateBlog from "./blog/CreateBlog";
+import ReadBlog from "./blog/ReadBlog";
 
 const GlobalStyle = createGlobalStyle`
     * {
@@ -43,6 +44,7 @@ const Routes = () => {
         <Route path="/signup" exact component={Signup} />
         <Route path="/signin" exact component={Signin} />
         <Route path="/topics/:slug" exact component={ReadSingleTopic} />
+        <Route path="/blogs/:slug" exact component={ReadBlog} />
         <Route path="/auth/activate/:token" exact component={Activate} />
         <PrivateRoute path="/private" exact component={Private} />
         <AdminRoute path="/admin" exact component={Admin} />

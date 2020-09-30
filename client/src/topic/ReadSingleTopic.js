@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { readTopic } from "../action/topic";
+import { Link } from "react-router-dom";
 import { readBlogsByTopic } from "../action/blog";
 import useReactRouter from "use-react-router";
 import styled from "styled-components";
@@ -8,7 +9,7 @@ import Layout from "../core/Layout";
 
 const SingleTopicContainer = styled.section`
   width: 100%;
-  padding-top: 8vh;
+  padding-top: 9vh;
 
   hr {
     width: 70%;
@@ -249,6 +250,11 @@ const SingleTopicBlogCard = styled.section`
   flex-direction: column;
   gap: 2.5rem;
 
+  a {
+    color: black;
+    text-decoration: none;
+  }
+
   img {
     display: block;
     width: 100%;
@@ -375,7 +381,9 @@ const ReadSingleTopic = () => {
               blogs.map((b, i) => (
                 <SingleTopicBlogCard>
                   <img src={`${b.image.url}`} />
-                  <h1>{b.title}</h1>
+                  <Link to={`/blogs/${b.slug}`}>
+                    <h1>{b.title}</h1>
+                  </Link>
                   <p>{b.excerpt}</p>
                 </SingleTopicBlogCard>
               ))}

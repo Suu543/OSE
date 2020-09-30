@@ -225,7 +225,9 @@ exports.readBlog = async (req, res) => {
   const slug = req.params.slug;
 
   try {
-    let blog = await Blog.findOne({ slug });
+    let blog = await Blog.findOne({ slug })
+      .populate("topics", "name")
+      .populate("tags", "name");
     return res.status(200).json(blog);
   } catch (error) {
     return res.status(400).json({ error });
