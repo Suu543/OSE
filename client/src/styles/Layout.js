@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Navbar = styled.nav`
-  height: 8vh;
+  height: 10vh;
   width: 100%;
   margin: auto;
   position: fixed;

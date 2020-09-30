@@ -21,7 +21,7 @@ const blogSchema = new mongoose.Schema(
 
     excerpt: {
       type: String,
-      max: 100,
+      min: 10,
     },
 
     body: {

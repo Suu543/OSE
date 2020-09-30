@@ -1,13 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { readTopic } from "../action/topic";
+import { readBlogsByTopic } from "../action/blog";
 import useReactRouter from "use-react-router";
 import styled from "styled-components";
 import Layout from "../core/Layout";
 
 const SingleTopicContainer = styled.section`
   width: 100%;
-  padding-top: 8.5vh;
+  padding-top: 8vh;
+
+  hr {
+    width: 70%;
+    margin: auto;
+    padding: 0.5rem;
+    margin-top: 10vh;
+  }
 `;
 
 const SingleTopicHeaderContainer = styled.section`
@@ -94,8 +102,7 @@ const SingleTopicHeaderRight = styled.section`
 `;
 
 const SingleTopicLatestContainer = styled.section`
-  width: 90%;
-  min-height: 100vh;
+  width: 70%;
   margin: auto;
 
   h1 {
@@ -146,7 +153,7 @@ const SingleTopicLatestFirstCardContent = styled.section`
   }
 
   p {
-    font-size: 2rem;
+    font-size: 1.6rem;
     color: rgb(85, 90, 110);
   }
 `;
@@ -156,7 +163,7 @@ const SingleTopicLatestFirstCardImage = styled.section`
 
   img {
     display: block;
-    width: 95%;
+    width: 93%;
     margin-left: auto;
   }
 `;
@@ -174,13 +181,13 @@ const SingleTopicLatestSecondCard = styled.section`
   }
 
   h1 {
-    font-size: 3.5rem;
+    font-size: 2.8rem;
     margin: 0;
     color: rgb(85, 90, 110);
   }
 
   p {
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: rgb(85, 90, 110);
   }
 `;
@@ -198,7 +205,7 @@ const SingleTopicLatestThirdCard = styled.section`
   }
 
   h1 {
-    font-size: 3.5rem;
+    font-size: 2.8rem;
     width: 95%;
     margin: 0;
     margin-left: auto;
@@ -206,10 +213,53 @@ const SingleTopicLatestThirdCard = styled.section`
   }
 
   p {
-    font-size: 2rem;
+    font-size: 1.5rem;
     color: rgb(85, 90, 110);
     width: 95%;
     margin-left: auto;
+  }
+`;
+
+const SingleTopicBlogsContainer = styled.section`
+  width: 70%;
+  margin: auto;
+  margin-top: 2vh;
+  min-height: 10vh;
+`;
+
+const SingleTopicBlogsTitle = styled.h1`
+  font-size: 3.5rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  color: black;
+  margin-bottom: 8vh;
+`;
+
+const SingleTopicBlogWrapper = styled.section`
+  width: 100%;
+  display: grid;
+  grid-template-columns: 4fr 4fr 4fr;
+  gap: 4rem;
+  justify-content: space-around;
+`;
+
+const SingleTopicBlogCard = styled.section`
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+
+  img {
+    display: block;
+    width: 100%;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  p {
+    font-size: 1.2rem;
   }
 `;
 
@@ -220,16 +270,43 @@ const ReadSingleTopic = () => {
     name: "",
     description: "",
   });
+  const [blogs, setBlogs] = useState([]);
+  const [latests, setLatests] = useState([]);
 
   useEffect(() => {
     loadCurrentTopic();
+    loadBlogsByTopic();
   }, []);
 
   const loadCurrentTopic = async () => {
     let response = await readTopic(slug);
-    console.log("response", response.image.url);
     let { image, name, description } = response;
     setTopic({ image, name, description });
+  };
+
+  const loadBlogsByTopic = async () => {
+    try {
+      let blogs = await readBlogsByTopic(slug);
+      let latestBlogs = [];
+
+      if (blogs.length > 0) {
+        setBlogs([...blogs]);
+      }
+
+      if (blogs.length > 0) {
+        let length = blogs.length;
+        if (blogs.length > 3) length = 3;
+
+        for (let i = 0; i < length; i++) {
+          latestBlogs.push(blogs[i]);
+        }
+
+        setLatests([...latestBlogs]);
+      }
+    } catch (error) {
+      console.log("error");
+      return error;
+    }
   };
 
   return (
@@ -251,50 +328,59 @@ const ReadSingleTopic = () => {
         <SingleTopicLatestContainer>
           <h1>Latest Articles</h1>
           <SingleTopicLatestWrapper>
-            <SingleTopicLatestFirstCard>
-              <SingleTopicLatestFirstCardContent>
-                <h6>Case Study</h6>
-                <h1>
-                  goUrban are making their mark on mobility with the help of
-                  Veriff
-                </h1>
-                <p>
-                  We check in with goUrban, after two years as partners of
-                  Veriff, to see how they’ve been progressing since 2018 and get
-                  their view on Veriff so far.
-                </p>
-              </SingleTopicLatestFirstCardContent>
-              <SingleTopicLatestFirstCardImage>
-                <img src="https://images.prismic.io/veriff/ca0cee40-e516-4eb6-9333-924f88f590c5_20-40_GoUrban_Blog.png?auto=compress,format&rect=0,0,1920,1080&w=1920&h=1080" />
-              </SingleTopicLatestFirstCardImage>
-            </SingleTopicLatestFirstCard>
-            <SingleTopicLatestSecondCard>
-              <img src="https://images.prismic.io/veriff/7d4274bc-c6fc-4636-8c48-2f019bc70ae5_20-38_IDV-success-crypto_Blog.png?auto=compress,format&rect=0,0,1920,1080&w=1920&h=1080" />
-              <h1>Why Crypto is Ready for Identity Verification</h1>
-              <p>
-                Bitcoin, Litecoin, Etherium - just three of an estimated 6,088
-                cryptocurrencies according to CoinMarketCap in August 2020, with
-                a $337.28 billion market cap. Crypto is big business and
-                companies trading over the internet want in. But, as crypto
-                grows, so does the need for regulation and protection against
-                fraud.
-              </p>
-            </SingleTopicLatestSecondCard>
-            <SingleTopicLatestThirdCard>
-              <img src="https://images.prismic.io/veriff/43d61037-3f5d-4c90-87ab-3e8734732abf_20-39_FATF_Blog+copy+2.png?auto=compress,format&rect=0,0,1920,1080&w=1920&h=1080" />
-              <h1>
-                12 Month Review of Revised FATF Standards - Virtual Assets and
-                VASPs
-              </h1>
-              <p>
-                After the FATF completed it's year long review of how it's
-                revised standards have been implemented, we look at what the
-                outcome was, and how Veriff may be able to assist VASPs with
-                meeting those standards.
-              </p>
-            </SingleTopicLatestThirdCard>
+            {latests.length > 0 &&
+              latests.map((b, i) => {
+                if (i === 0) {
+                  return (
+                    <SingleTopicLatestFirstCard>
+                      <SingleTopicLatestFirstCardContent>
+                        <h6>{b.tags[0].name}</h6>
+                        <h1>{b.title}</h1>
+                        <p>{b.excerpt}</p>
+                      </SingleTopicLatestFirstCardContent>
+                      <SingleTopicLatestFirstCardImage>
+                        <img src={`${b.image.url}`} />
+                      </SingleTopicLatestFirstCardImage>
+                    </SingleTopicLatestFirstCard>
+                  );
+                }
+
+                if (i === 1) {
+                  return (
+                    <SingleTopicLatestSecondCard>
+                      <img src={`${b.image.url}`} />
+                      <h1>{b.title}</h1>
+                      <p>{b.excerpt}</p>
+                    </SingleTopicLatestSecondCard>
+                  );
+                }
+
+                if (i === 2) {
+                  return (
+                    <SingleTopicLatestThirdCard>
+                      <img src={`${b.image.url}`} />
+                      <h1>{b.title}</h1>
+                      <p>{b.excerpt}</p>
+                    </SingleTopicLatestThirdCard>
+                  );
+                }
+              })}
           </SingleTopicLatestWrapper>
         </SingleTopicLatestContainer>
+        <hr />
+        <SingleTopicBlogsContainer>
+          <SingleTopicBlogsTitle>{topic.name}</SingleTopicBlogsTitle>
+          <SingleTopicBlogWrapper>
+            {blogs.length > 0 &&
+              blogs.map((b, i) => (
+                <SingleTopicBlogCard>
+                  <img src={`${b.image.url}`} />
+                  <h1>{b.title}</h1>
+                  <p>{b.excerpt}</p>
+                </SingleTopicBlogCard>
+              ))}
+          </SingleTopicBlogWrapper>
+        </SingleTopicBlogsContainer>
       </SingleTopicContainer>
     </Layout>
   );

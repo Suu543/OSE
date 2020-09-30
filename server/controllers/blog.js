@@ -198,7 +198,8 @@ exports.createBlog = async (req, res) => {
         blog.title = title;
         blog.slug = slugify(title).toLowerCase();
         blog.body = body;
-        blog.excerpt = smartTrim(excerpt, 60, " ", "...");
+        // blog.excerpt = smartTrim(excerpt, 150, " ", "...");
+        blog.excerpt = excerpt;
         blog.topics = topics && topics.split(",");
         blog.tags = tags && blogTags;
         blog.references = blogRefs;
@@ -306,13 +307,14 @@ exports.removeBlog = async (req, res) => {
 };
 
 exports.findByTopic = async (req, res) => {
-  const slug = req.params.topic.toLowerCase();
+  const slug = req.params.topic;
 
   try {
     const refTopic = await Topic.findOne({ slug });
-    const blogs = await Blog.find({ topics: { $in: refTopic } })
-      .populate("topics", "title")
-      .populate("tags", "title");
+    console.log("refTopic", refTopic);
+    const blogs = await Blog.find({ topics: { $in: refTopic._id } })
+      .populate("topics", "name")
+      .populate("tags", "name");
 
     return res.status(200).json(blogs);
   } catch (error) {
