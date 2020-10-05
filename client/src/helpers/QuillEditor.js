@@ -32,8 +32,6 @@ class QuillEditor extends React.Component {
   }
 
   handleChange(html) {
-    console.log("handleChange");
-    console.log("html", html);
     this.setState(
       {
         editorHtml: html,
@@ -50,7 +48,6 @@ class QuillEditor extends React.Component {
   }
 
   imageHandler() {
-    console.log("Image Handler");
     const input = document.createElement("input");
 
     input.setAttribute("type", "file");
@@ -97,8 +94,6 @@ class QuillEditor extends React.Component {
   render() {
     return (
       <div>
-        {JSON.stringify(this.state.editorHtml)}
-        <hr />
         <ReactQuill
           ref={(el) => {
             this.quill = el;

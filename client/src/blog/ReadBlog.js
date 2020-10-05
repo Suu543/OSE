@@ -20,7 +20,7 @@ const BlogImage = styled.section`
   img {
     display: block;
     width: 85%;
-    height: 55vh;
+    height: 70vh;
     margin: auto;
   }
 `;
@@ -28,7 +28,7 @@ const BlogImage = styled.section`
 const Blog = styled.section`
   width: 100%;
   position: absolute;
-  top: 45%;
+  top: 60%;
 `;
 
 const BlogHeader = styled.section`
@@ -149,8 +149,7 @@ const BlogBody = styled.section`
   }
 
   img {
-    width: 80%;
-    margin: auto;
+    width: 100%;
   }
 `;
 

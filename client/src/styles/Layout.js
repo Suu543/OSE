@@ -25,10 +25,23 @@ export const NavbarLeft = styled.section`
   h1 {
     font-size: 5rem;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 
     a {
+      display: inline-block;
+      /* width: 7rem;
+      height: 7rem; */
+      height: 10vh;
+      width: 20vh;
       text-decoration: none;
       color: #588a72;
+      background: url("https://ose.s3.ap-northeast-2.amazonaws.com/static/%EB%A1%9C%EA%B3%A0-%EA%B2%B0%EC%A0%95.png")
+        no-repeat;
+      background-size: contain;
+      background-position: center;
     }
   }
 

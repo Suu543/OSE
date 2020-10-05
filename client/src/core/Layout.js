@@ -17,7 +17,7 @@ const Layout = ({ children, match, history }) => {
     <Navbar open={open}>
       <NavbarLeft>
         <h1>
-          <Link to="/">OSE</Link>
+          <Link to="/"></Link>
         </h1>
 
         <NavbarRightHamburger open={open} onClick={() => setOpen(!open)}>

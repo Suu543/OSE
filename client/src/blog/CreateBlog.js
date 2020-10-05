@@ -280,7 +280,7 @@ const CreateBlog = () => {
           <QuillEditor
             onEditorChange={onEditorChange}
             onFilesChange={onFilesChange}
-            style={{ width: "100%" }}
+            theme="snow"
           />
         </QuillWrapper>
         <BtnWrapper>
