@@ -143,6 +143,14 @@ export const QuillWrapper = styled.article`
   justify-content: center;
   width: 80vw;
   min-height: 70vh;
+
+  div {
+    width: 100%;
+
+    div:first-child {
+      position: sticky;
+    }
+  }
 `;
 
 export const BtnWrapper = styled.article`

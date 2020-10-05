@@ -15,8 +15,6 @@ import {
   Title,
   ExcerptWrapper,
   ExcerptTextArea,
-  ArtistWrapper,
-  ArtistInput,
   TagWrapper,
   TagListWrapper,
   TagInputWrapper,
@@ -281,6 +279,7 @@ const CreateBlog = () => {
             onEditorChange={onEditorChange}
             onFilesChange={onFilesChange}
             theme="snow"
+            style={{ width: "100%" }}
           />
         </QuillWrapper>
         <BtnWrapper>
