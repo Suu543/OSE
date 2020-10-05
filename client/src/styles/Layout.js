@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Navbar = styled.nav`
-  height: 10vh;
+  height: 9vh;
   width: 100%;
   margin: auto;
   position: fixed;
@@ -34,7 +34,7 @@ export const NavbarLeft = styled.section`
       display: inline-block;
       /* width: 7rem;
       height: 7rem; */
-      height: 10vh;
+      height: 9vh;
       width: 20vh;
       text-decoration: none;
       color: #588a72;

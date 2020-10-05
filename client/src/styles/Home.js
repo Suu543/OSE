@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const HomeContainer = styled.main`
   width: 100%;
   position: relative;
+  overflow: hidden;
 `;
 
 export const HomeBackground = styled.section`
@@ -70,7 +71,7 @@ export const HomeComponentsContainer = styled.article`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 55%;
+  width: 60%;
   margin: auto;
 `;
 
@@ -153,11 +154,14 @@ export const HomeTopBodyRightElem = styled.section`
   }
 `;
 
-export const HomeTopicSection = styled.section`
+export const HomeTopicContainer = styled.section`
   width: 90%;
-  margin: auto;
-  margin-top: 8rem;
-  margin-bottom: 20vh;
+  margin-top: 10vh;
+  margin-bottom: 10vh;
+
+  @media all and (max-width: 1200px) {
+    width: 95vw;
+  }
 `;
 
 export const HomeTopicHeader = styled.h1`
@@ -165,7 +169,7 @@ export const HomeTopicHeader = styled.h1`
   font-size: 4rem;
   color: #47715d;
   letter-spacing: 3px;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
 
   span {
     font-size: 6rem;
@@ -174,6 +178,191 @@ export const HomeTopicHeader = styled.h1`
 
 export const HomeTopicWrapper = styled.section`
   width: 100%;
-  height: 100%;
+  height: 60vh;
+  display: grid;
+  grid-template-columns: 6fr 6fr;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
+
+  @media all and (max-width: 1200px) {
+    grid-template-columns: 5fr 7fr;
+  }
+
+  @media all and (max-width: 800px) {
+    display: flex;
+    flex-direction: column;
+  }
+`;
+
+export const HomeTopicLeft = styled.section`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 10;
+  background-color: white;
+
+  img {
+    display: block;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+  }
+
+  @media all and (max-width: 800px) {
+    img {
+      width: 60%;
+      height: 60%;
+    }
+  }
+`;
+
+export const HomeCommunityContainer = styled.section`
+  width: 100vw;
+  background-color: #ededed;
+`;
+
+export const HomeCommunity = styled.section`
+  width: 80%;
+  margin: auto;
+`;
+
+export const HomeCommunityHeader = styled.section`
+  width: 70%;
+  margin: auto;
+  margin-top: 5vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    display: block;
+    width: 25%;
+    height: 25%;
+  }
+
+  h1 {
+    font-size: 5rem;
+    color: #5d9175;
+    text-transform: uppercase;
+    span {
+      font-size: 6rem;
+    }
+  }
+
+  @media all and (max-width: 800px) {
+    width: 100%;
+  }
+`;
+
+export const HomeCommunityBody = styled.section`
+  width: 100%;
+
+  section:nth-child(1) {
+    border-left: 10px solid #95c5aa;
+    padding-left: 4rem;
+  }
+
+  section:nth-child(2) {
+    border-right: 10px solid #5d9175;
+    padding-right: 4rem;
+    justify-content: flex-end;
+    align-items: flex-end;
+  }
+
+  section:nth-child(3) {
+    border-left: 10px solid #3d6450;
+    padding-left: 4rem;
+  }
+
+  section {
+    width: 75%;
+    margin: 4rem auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h1 {
+      text-transform: uppercase;
+      font-size: calc(3rem + 1vw);
+    }
+
+    p {
+      width: 70%;
+      font-size: calc(1.5rem);
+    }
+  }
+
+  @media all and (max-width: 800px) {
+    section {
+      width: 100%;
+    }
+
+    section:nth-child(2) {
+      justify-content: center;
+      border-left: 10px solid #5d9175;
+      border-right: none;
+      padding-left: 4rem;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+  }
+`;
+
+export const HomeDonationContainer = styled.section`
+  width: 100%;
+  margin-top: 10vh;
+  margin-bottom: 30vh;
+`;
+
+export const HomeDonationWrapper = styled.section`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+
+    img:nth-child(1) {
+      display: block;
+      width: 40%;
+      margin: auto;
+      position: relative;
+      left: -20%;
+      z-index: -1;
+      animation-duration: 3s;
+      animation-name: moveToBox;
+      animation-iteration-count: infinite;
+    }
+
+    img {
+      display: block;
+      width: 60%;
+    }
+
+    h1 {
+      font-size: 5rem;
+      margin-bottom: 10rem;
+    }
+
+    p {
+      font-size: 2rem;
+      color: #e4e4e4;
+    }
+  }
+
+  @keyframes moveToBox {
+    from {
+      bottom: 0;
+    }
+
+    to {
+      bottom: -150px;
+    }
+  }
 `;

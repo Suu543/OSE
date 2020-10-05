@@ -147,8 +147,12 @@ export const QuillWrapper = styled.article`
   div {
     width: 100%;
 
-    div:first-child {
-      position: sticky;
+    div:nth-child(1) {
+    }
+
+    div:nth-child(2) {
+      max-height: 700px;
+      overflow-y: scroll;
     }
   }
 `;

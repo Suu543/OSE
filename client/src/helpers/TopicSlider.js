@@ -5,7 +5,14 @@ import { getTopics } from "../action/topic";
 
 const Container = styled.section`
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
+
+  @media all and (max-width: 800px) {
+    margin-bottom: 50vh;
+  }
 `;
 
 const CardSliderContainer = styled.section`
@@ -24,7 +31,6 @@ const CardSliderContainer = styled.section`
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 9;
   }
 `;
 
@@ -186,7 +192,7 @@ const TopicSlider = () => {
         return { ...topic, index: idx };
       });
       setTopics([...topics, ...indexedResponse]);
-      setTopic(indexedResponse[1]);
+      setTopic(indexedResponse[1] ? indexedResponse[1] : indexedResponse[0]);
     } catch (error) {
       console.log("error", error);
     }
