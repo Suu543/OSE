@@ -1,238 +1,358 @@
-import React, { useState } from "react";
-import { Link, withRouter } from "react-router-dom";
-import { isAuth, signout } from "../auth/helpers";
+import React, { useState, useEffect } from "react";
+import Layout from "./Layout";
+import TestSlider from "../helpers/TestSlider";
 import styled from "styled-components";
 
-const Test = ({ children, match, history }) => {
-  const isActive = (path) => {
-    // match.path === history.location.pathname
-    if (match.path === path) {
-      return { color: "#000" };
-    } else {
-      return { color: "#fff" };
-    }
-  };
-
-  const nav = () => (
-    <ul className="nav nav-tabs bg-primary">
-      <li className="nav-item">
-        <Link to="/" className="nav-link" style={isActive("/")}>
-          Home
-        </Link>
-      </li>
-
-      {!isAuth() && (
-        <React.Fragment>
-          <li className="nav-item">
-            <Link to="/signup" className="nav-link" style={isActive("/signup")}>
-              Signup
-            </Link>
-          </li>
-
-          <li className="nav-item">
-            <Link to="/signin" className="nav-link" style={isActive("/signin")}>
-              Signin
-            </Link>
-          </li>
-        </React.Fragment>
-      )}
-
-      {isAuth() && isAuth().role === "admin" && (
-        <li className="nav-item">
-          <Link to="/admin" className="nav-link" style={isActive("/admin")}>
-            {isAuth().name}
-          </Link>
-        </li>
-      )}
-
-      {isAuth() && isAuth().role === "user" && (
-        <li className="nav-item">
-          <Link to="/private" className="nav-link" style={isActive("/admin")}>
-            {isAuth().name}
-          </Link>
-        </li>
-      )}
-
-      {isAuth() && (
-        <li className="nav-item">
-          <span
-            style={{ curosr: "pointer", color: "#fff" }}
-            className="nav-link"
-            onClick={() => {
-              signout(() => {
-                history.push("/");
-              });
-            }}
-          >
-            Signout
-          </span>
-        </li>
-      )}
-    </ul>
-  );
-
-  return (
-    <React.Fragment>
-      {nav()}
-      <div className="container">{children}</div>
-    </React.Fragment>
-  );
-};
-
-const Navbar = styled.nav`
-  min-height: 8vh;
+export const HomeContainer = styled.main`
   width: 100%;
-  margin: auto;
+`;
+
+export const HomeIntroContainer = styled.section`
+  width: 100%;
+  height: 60vh;
   position: relative;
-  display: grid;
-  grid-template-columns: 3fr 6fr 3fr;
-  background-color: white;
+  overflow: hidden;
+`;
 
-  ul {
-    display: flex;
-    align-items: center;
-    list-style: none;
+export const HomeIntroBackground = styled.article`
+  width: 100%;
+  height: 60vh;
+  background: #47715d;
+  position: absolute;
 
-    li {
-      font-weight: 700;
+  div {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: url("https://ose.s3.ap-northeast-2.amazonaws.com/static/wave.png");
+    background-size: 550px 100px;
+  }
 
-      a {
-        text-decoration: none;
-      }
+  div:nth-child(1) {
+    animation: animate 30s linear infinite;
+    z-index: 2;
+    opacity: 0.5;
+    animation-delay: 0s;
+  }
+
+  div:nth-child(2) {
+    animation: animate 15s linear infinite;
+    z-index: 3;
+    opacity: 0.5;
+    animation-delay: -5s;
+    bottom: 10px;
+  }
+
+  div:nth-child(3) {
+    animation: animate 30s linear infinite;
+    opacity: 0.2;
+    z-index: 1;
+    animation-delay: -5s;
+    bottom: 0;
+  }
+
+  div:nth-child(4) {
+    animation: animate 30s linear infinite;
+    z-index: 2;
+    opacity: 0.7;
+    animation-delay: -2s;
+    bottom: 20px;
+  }
+
+  @keyframes animate {
+    0% {
+      background-position-x: 0;
+    }
+
+    100% {
+      background-position-x: 1000px;
     }
   }
 `;
 
-const NavbarLeft = styled.ul`
-  justify-content: center;
-
-  li {
-    font-size: 5rem;
-
-    a {
-      color: #588a72;
-    }
-  }
-`;
-
-const NavbarCenter = styled.ul`
-  justify-content: space-evenly;
-  align-items: center;
-
-  li {
-    font-size: 2rem;
-
-    a {
-      color: black;
-    }
-  }
-`;
-
-const NavbarRight = styled.ul`
+const HomeIntroContent = styled.article`
+  width: 100%;
+  position: relative;
+  top: 10vh;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  justify-content: flex-start;
 
-  li {
-    font-size: 2rem;
-    margin-left: 1.5rem;
-    color: black;
+  h1 {
+    font-size: 2.5rem;
+    color: white;
+    letter-spacing: 3px;
+    margin-bottom: 2rem;
+    font-weight: 700;
 
-    a {
-      color: black;
+    span {
+      font-size: 6rem;
     }
   }
 
-  li:nth-child(2),
-  button {
-    background: #588a72;
+  p {
+    width: 100%;
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 600;
     color: white;
-    padding: 1rem;
-    border-radius: 10%;
+    margin: auto;
   }
 
   button {
-    font-size: 1.5rem;
-    color: white;
+    display: block;
+    width: 80%;
+    height: 5vh;
     border: none;
-    display: inline-block;
+    font-size: 2.3rem;
+    border-radius: 1.5rem;
+    margin-top: 3rem;
+    color: #47715d;
+    font-weight: 500;
     margin-left: 1rem;
   }
 `;
 
-const TestNav = ({ children, match, history }) => {
-  const nav = () => (
-    <Navbar>
-      <NavbarLeft>
-        <li>
-          <Link to="/">OSE</Link>
-        </li>
-      </NavbarLeft>
-      <NavbarCenter>
-        <li>
-          <Link to="/about">About Us</Link>
-        </li>
-        <li>
-          <Link to="/contact">Contact</Link>
-        </li>
-        <li>
-          <Link to="/blogs">Blog</Link>
-        </li>
-        <li>
-          <Link to="/community">Community</Link>
-        </li>
-        <li>
-          <Link to="/donate">Donate</Link>
-        </li>
-      </NavbarCenter>
-      {!isAuth() && (
-        <NavbarRight>
-          <li>
-            <Link to="/signin">Sign in</Link>
-          </li>
-          <li>
-            <Link to="/signup">Get Started</Link>
-          </li>
-        </NavbarRight>
-      )}
+const HomeTopicContainer = styled.section`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  padding: 5rem 0;
 
-      {isAuth() && isAuth().role === "admin" && (
-        <NavbarRight>
-          <li>
-            <Link to="/admin">{isAuth().name}</Link>
-          </li>
-          <button
-            onClick={() => {
-              signout(() => {
-                history.push("/");
-              });
-            }}
-          >
-            Signout
-          </button>
-        </NavbarRight>
-      )}
+  h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    color: #47715d;
 
-      {isAuth() && isAuth().role === "user" && (
-        <NavbarRight style={{ justifyContent: "center" }}>
-          <li>
-            <Link to="/user">{isAuth().name}</Link>
-          </li>
-          <button
-            onClick={() => {
-              signout(() => {
-                history.push("/");
-              });
-            }}
-          >
-            Signout
-          </button>
-        </NavbarRight>
-      )}
-    </Navbar>
+    span {
+      font-size: 5rem;
+    }
+  }
+`;
+
+const HomeCommunityContainer = styled.section`
+  width: 100%;
+  background-color: #ededed;
+  padding: 5rem 0;
+`;
+
+const HomeCommunityHeader = styled.header`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+
+  h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    color: #47715d;
+
+    span {
+      font-size: 5rem;
+    }
+  }
+`;
+
+export const HomeCommunityContent = styled.article`
+  width: 100%;
+
+  section:nth-child(1) {
+    border-left: 10px solid #95c5aa;
+    padding-left: 4rem;
+  }
+
+  section:nth-child(2) {
+    border-right: 10px solid #5d9175;
+    padding-right: 4rem;
+  }
+
+  section:nth-child(3) {
+    border-left: 10px solid #3d6450;
+    padding-left: 4rem;
+  }
+
+  section {
+    width: 85%;
+    margin: 4rem auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h1 {
+      text-transform: uppercase;
+      font-size: calc(3rem + 1vw);
+    }
+
+    p {
+      width: 100%;
+      font-size: calc(1.5rem);
+    }
+  }
+`;
+
+export const HomeDonationContainer = styled.section`
+  width: 100%;
+`;
+
+export const HomeDonationHeader = styled.header`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  padding: 5rem 0;
+
+  h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    color: #47715d;
+
+    span {
+      font-size: 5rem;
+    }
+  }
+`;
+
+export const HomeDonationContent = styled.article`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 50%;
+
+    img:nth-child(1) {
+      display: block;
+      width: 50%;
+      margin: auto;
+      position: relative;
+      z-index: -1;
+      animation-duration: 3s;
+      animation-name: moveToBox;
+      animation-iteration-count: infinite;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      margin: auto;
+    }
+
+    h1 {
+      font-size: 5rem;
+      margin-bottom: 10rem;
+    }
+
+    p {
+      font-size: 2rem;
+      color: #e4e4e4;
+    }
+  }
+
+  @keyframes moveToBox {
+    from {
+      bottom: 0;
+    }
+
+    to {
+      bottom: -150px;
+    }
+  }
+`;
+
+const Test = () => {
+  useEffect(() => {}, []);
+
+  return (
+    <Layout>
+      <HomeContainer>
+        <HomeIntroContainer>
+          <HomeIntroBackground>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </HomeIntroBackground>
+          <HomeIntroContent>
+            <h1>
+              <span>O</span>UR <span>S</span>OLE <span>E</span>ARTH
+            </h1>
+            <p>
+              There is only one Earth in the universe and we mankind have only
+              one homeland.
+            </p>
+            <button>Get Started</button>
+          </HomeIntroContent>
+        </HomeIntroContainer>
+        <HomeTopicContainer>
+          <h1>
+            <span>T</span>OPIC
+          </h1>
+          {TestSlider()}
+        </HomeTopicContainer>
+        <HomeCommunityContainer>
+          <HomeCommunityHeader>
+            <h1>
+              <span>C</span>OMMUNITY
+            </h1>
+          </HomeCommunityHeader>
+          <HomeCommunityContent>
+            <section>
+              <h1>Title</h1>
+              <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s, when an unknown printer took a galley
+                of type and scrambled it to make a type specimen book. It has
+              </p>
+            </section>
+            <section>
+              <h1>Title</h1>
+              <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s, when an unknown printer took a galley
+                of type and scrambled it to make a type specimen book. It has
+              </p>
+            </section>
+            <section>
+              <h1>Title</h1>
+              <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s, when an unknown printer took a galley
+                of type and scrambled it to make a type specimen book. It has
+              </p>
+            </section>
+          </HomeCommunityContent>
+        </HomeCommunityContainer>
+        <HomeDonationContainer>
+          <HomeDonationHeader>
+            <h1>
+              <span>D</span>ONATION
+            </h1>
+          </HomeDonationHeader>
+          <HomeDonationContent>
+            <section>
+              <img src="https://ose.s3.ap-northeast-2.amazonaws.com/static/icon_donation_coin.png" />
+              <img src="https://ose.s3.ap-northeast-2.amazonaws.com/static/icon_donation_box.png" />
+            </section>
+          </HomeDonationContent>
+        </HomeDonationContainer>
+      </HomeContainer>
+    </Layout>
   );
-
-  return <React.Fragment>{nav()}</React.Fragment>;
 };
 
-export default withRouter(TestNav);
+export default Test;

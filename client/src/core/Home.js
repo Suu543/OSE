@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Layout from "./Layout";
 import TopicSlider from "../helpers/TopicSlider";
-// import Swiper from "react-id-swiper";
-// import "swiper/swiper.scss";
 
 import {
   HomeContainer,
@@ -14,8 +12,6 @@ import {
   HomeTopBodyLeftElem,
   HomeTopBodyLeftElemLeft,
   HomeTopBodyRightElemRight,
-  HomeTopBodyRight,
-  HomeTopBodyRightElem,
   HomeTopicContainer,
   HomeTopicHeader,
   HomeTopicWrapper,
@@ -86,11 +82,6 @@ const Home = () => {
                 </HomeTopBodyRightElemRight>
               </HomeTopBodyLeftElem>
             </HomeTopBodyLeft>
-            <HomeTopBodyRight>
-              <HomeTopBodyRightElem>
-                <iframe src="https://www.youtube.com/embed/JaSe85Mcwp0"></iframe>
-              </HomeTopBodyRightElem>
-            </HomeTopBodyRight>
           </HomeTopBody>
           <HomeTopicContainer>
             <HomeTopicWrapper>

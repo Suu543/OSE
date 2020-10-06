@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import Home from "./core/Home";
+import Test from "./core/Test";
 
 import Signup from "./auth/Signup";
 import Signin from "./auth/Signin";
@@ -46,6 +47,7 @@ const Routes = () => {
         <Route path="/topics/:slug" exact component={ReadSingleTopic} />
         <Route path="/blogs/:slug" exact component={ReadBlog} />
         <Route path="/auth/activate/:token" exact component={Activate} />
+        <Route path="/test" exact component={Test} />
         <PrivateRoute path="/private" exact component={Private} />
         <AdminRoute path="/admin" exact component={Admin} />
         <AdminRoute path="/admin/topic/create" exact component={CreateTopic} />

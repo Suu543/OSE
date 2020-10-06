@@ -9,6 +9,7 @@ const Container = styled.section`
   align-items: center;
   justify-content: center;
   position: relative;
+  margin-top: 2rem;
 `;
 
 const CardSliderContainer = styled.section`
@@ -29,12 +30,6 @@ const CardSliderContainer = styled.section`
     left: 0;
   }
 `;
-
-/*
-const CardSliderContainer = styled.section`
-  position: relative;
-`;
-*/
 
 const CardLeftButton = styled.button`
   display: inline-block;
@@ -168,12 +163,12 @@ const CardImage = styled.section`
 
 const CardName = styled.section`
   h1 {
-    font-size: 3rem;
+    font-size: 2rem;
     text-align: center;
   }
 `;
 
-const TopicSlider = () => {
+const TestSlider = () => {
   const [topics, setTopics] = useState([]);
   const [topic, setTopic] = useState("");
 
@@ -245,4 +240,4 @@ const TopicSlider = () => {
   );
 };
 
-export default TopicSlider;
+export default TestSlider;
