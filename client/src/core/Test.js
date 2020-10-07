@@ -120,7 +120,7 @@ export const HomeIntroBoxContainer = styled.article`
   display: flex;
   align-items: flex-end;
   margin: auto;
-  margin-top: 48vh;
+  margin-top: 50vh;
   position: flex;
   justify-content: space-between;
   position: relative;
@@ -128,7 +128,7 @@ export const HomeIntroBoxContainer = styled.article`
 
   section {
     flex: 0 0 auto;
-    min-height: 100px;
+    min-height: 120px;
     opacity: 0.9;
     width: 30%;
     background: #99c7ad;
@@ -142,18 +142,13 @@ export const HomeIntroBoxContainer = styled.article`
     }
   }
 
-  /* @media all and (min-width: 332px) and (max-width: 476px) {
-    width: 90%;
-    top: 20vh;
-  }
-
   @media all and (min-width: 477px) and (max-width: 768px) {
     width: 80%;
-    top: 20vh;
+    margin-top: 48vh;
 
-    div {
+    section {
       height: 150px;
-      width: 31%;
+      width: 32%;
 
       span {
         font-size: 1.8rem;
@@ -163,9 +158,10 @@ export const HomeIntroBoxContainer = styled.article`
 
   @media all and (min-width: 769px) and (max-width: 910px) {
     width: 70%;
+    margin-top: 42vh;
 
-    div {
-      height: 170px;
+    section {
+      height: 200px;
 
       span {
         font-size: 2.3rem;
@@ -175,9 +171,10 @@ export const HomeIntroBoxContainer = styled.article`
 
   @media all and (min-width: 911px) and (max-width: 1439px) {
     width: 60%;
+    margin-top: 44vh;
 
-    div {
-      height: 200px;
+    section {
+      height: 210px;
       width: 32%;
 
       span {
@@ -188,10 +185,10 @@ export const HomeIntroBoxContainer = styled.article`
 
   @media all and (min-width: 1440px) and (max-width: 1880px) {
     width: 55%;
-    top: 17vh;
+    margin-top: 42vh;
 
-    div {
-      height: 220px;
+    section {
+      height: 230px;
 
       span {
         font-size: 3rem;
@@ -201,15 +198,16 @@ export const HomeIntroBoxContainer = styled.article`
 
   @media all and (min-width: 1881px) {
     width: 50%;
-    top: 21vh;
+    margin-top: 40vh;
 
-    div {
-      height: 300px;
+    section {
+      height: 250px;
+
       span {
         font-size: 4rem;
       }
     }
-  } */
+  }
 `;
 
 export const HomeTopicContainer = styled.section`
