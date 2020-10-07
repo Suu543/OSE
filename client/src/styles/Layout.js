@@ -5,7 +5,7 @@ export const Navbar = styled.nav`
   width: 100%;
   margin: auto;
   position: fixed;
-  z-index: 10;
+  z-index: 11;
   display: grid;
   grid-template-columns: 3fr 6fr 3fr;
   background-color: white;

@@ -74,28 +74,28 @@ export const HomeIntroBackground = styled.article`
 export const HomeIntroContent = styled.article`
   width: 100%;
   position: relative;
-  top: 10vh;
+  top: 17vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 
   h1 {
-    font-size: 2.5rem;
+    font-size: 4rem;
     color: white;
     letter-spacing: 3px;
     margin-bottom: 2rem;
     font-weight: 700;
 
     span {
-      font-size: 5rem;
+      font-size: 6rem;
     }
   }
 
   p {
     width: 100%;
     text-align: center;
-    font-size: 2.5rem;
+    font-size: 2.7rem;
     font-weight: 600;
     color: white;
     margin: auto;
@@ -136,9 +136,15 @@ export const HomeIntroBoxContainer = styled.article`
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all ease 1s;
 
     span {
       font-size: 1.3rem;
+    }
+
+    :hover {
+      opacity: 1;
+      transform: scale(1.3);
     }
   }
 
