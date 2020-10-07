@@ -191,7 +191,7 @@ const TestSlider = () => {
         return { ...topic, index: idx };
       });
       setTopics([...topics, ...indexedResponse]);
-      setTopic(indexedResponse[1] ? indexedResponse[1] : indexedResponse[0]);
+      setTopic(indexedResponse[3] ? indexedResponse[3] : indexedResponse[0]);
     } catch (error) {
       console.log("error", error);
     }
