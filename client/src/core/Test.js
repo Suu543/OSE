@@ -144,24 +144,23 @@ export const HomeIntroBoxContainer = styled.article`
 
   @media all and (min-width: 477px) and (max-width: 768px) {
     width: 80%;
-    margin-top: 48vh;
+    margin-top: 52vh;
 
     section {
-      height: 150px;
-      width: 32%;
+      height: 120px;
 
       span {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
       }
     }
   }
 
   @media all and (min-width: 769px) and (max-width: 910px) {
-    width: 70%;
-    margin-top: 42vh;
+    margin-top: 49vh;
+    width: 80%;
 
     section {
-      height: 200px;
+      height: 140px;
 
       span {
         font-size: 2.3rem;
@@ -169,12 +168,26 @@ export const HomeIntroBoxContainer = styled.article`
     }
   }
 
-  @media all and (min-width: 911px) and (max-width: 1439px) {
-    width: 60%;
-    margin-top: 44vh;
+  @media all and (min-width: 911px) and (max-width: 1200px) {
+    margin-top: 46vh;
+    width: 70%;
 
     section {
-      height: 210px;
+      height: 170px;
+      width: 32%;
+
+      span {
+        font-size: 2.4rem;
+      }
+    }
+  }
+
+  @media all and (min-width: 1200px) and (max-width: 1439px) {
+    margin-top: 43vh;
+    width: 70%;
+
+    section {
+      height: 190px;
       width: 32%;
 
       span {
@@ -188,7 +201,7 @@ export const HomeIntroBoxContainer = styled.article`
     margin-top: 42vh;
 
     section {
-      height: 230px;
+      height: 190px;
 
       span {
         font-size: 3rem;
@@ -201,7 +214,7 @@ export const HomeIntroBoxContainer = styled.article`
     margin-top: 40vh;
 
     section {
-      height: 250px;
+      height: 210px;
 
       span {
         font-size: 4rem;
