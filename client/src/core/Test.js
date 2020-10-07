@@ -189,7 +189,7 @@ export const HomeIntroBoxContainer = styled.article`
   }
 
   @media all and (min-width: 1200px) and (max-width: 1439px) {
-    margin-top: 43vh;
+    margin-top: 45vh;
     width: 60%;
 
     section {
