@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Navbar = styled.nav`
-  height: 9vh;
+  max-height: 8.5vh;
   width: 100%;
   margin: auto;
   position: fixed;
@@ -72,7 +72,7 @@ export const NavbarCenter = styled.section`
     margin-top: 1rem;
     position: absolute;
     left: 0;
-    top: 6.5vh;
+    top: 7vh;
     z-index: 100;
     width: 100%;
     background: white;
@@ -131,7 +131,7 @@ export const NavbarRight = styled.section`
     position: absolute;
     z-index: 100;
     left: 0;
-    top: 29.5vh;
+    top: 32vh;
     background: white;
     width: 100%;
     animation: ${(props) => (props.open ? "leftToRight 0.6s ease-in-out" : "")};

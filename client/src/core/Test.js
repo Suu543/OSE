@@ -11,7 +11,6 @@ export const HomeIntroContainer = styled.section`
   width: 100%;
   height: 60vh;
   position: relative;
-  overflow: hidden;
 `;
 
 export const HomeIntroBackground = styled.article`
@@ -72,7 +71,7 @@ export const HomeIntroBackground = styled.article`
   }
 `;
 
-const HomeIntroContent = styled.article`
+export const HomeIntroContent = styled.article`
   width: 100%;
   position: relative;
   top: 10vh;
@@ -89,7 +88,7 @@ const HomeIntroContent = styled.article`
     font-weight: 700;
 
     span {
-      font-size: 6rem;
+      font-size: 5rem;
     }
   }
 
@@ -116,7 +115,105 @@ const HomeIntroContent = styled.article`
   }
 `;
 
-const HomeTopicContainer = styled.section`
+export const HomeIntroBoxContainer = styled.article`
+  width: 100%;
+  display: flex;
+  align-content: center;
+  margin: auto;
+  margin-top: 1vh;
+  position: flex;
+  justify-content: space-between;
+  position: relative;
+  z-index: 5;
+  top: 17vh;
+
+  div {
+    flex: 0 0 auto;
+    min-height: 100px;
+    opacity: 0.9;
+    width: 30%;
+    background: #99c7ad;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    span {
+      font-size: 1.3rem;
+    }
+  }
+
+  @media all and (min-width: 332px) and (max-width: 476px) {
+    width: 90%;
+    top: 20vh;
+  }
+
+  @media all and (min-width: 477px) and (max-width: 768px) {
+    width: 80%;
+    top: 20vh;
+
+    div {
+      height: 150px;
+      width: 31%;
+
+      span {
+        font-size: 1.8rem;
+      }
+    }
+  }
+
+  @media all and (min-width: 769px) and (max-width: 910px) {
+    width: 70%;
+
+    div {
+      height: 170px;
+
+      span {
+        font-size: 2.3rem;
+      }
+    }
+  }
+
+  @media all and (min-width: 911px) and (max-width: 1439px) {
+    width: 60%;
+
+    div {
+      height: 200px;
+      width: 32%;
+
+      span {
+        font-size: 2.4rem;
+      }
+    }
+  }
+
+  @media all and (min-width: 1440px) and (max-width: 1880px) {
+    width: 55%;
+    top: 17vh;
+
+    div {
+      height: 220px;
+
+      span {
+        font-size: 3rem;
+      }
+    }
+  }
+
+  @media all and (min-width: 1881px) {
+    width: 50%;
+    top: 21vh;
+
+    div {
+      height: 300px;
+      span {
+        font-size: 4rem;
+      }
+    }
+  }
+`;
+
+export const HomeTopicContainer = styled.section`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -135,13 +232,13 @@ const HomeTopicContainer = styled.section`
   }
 `;
 
-const HomeCommunityContainer = styled.section`
+export const HomeCommunityContainer = styled.section`
   width: 100%;
   background-color: #ededed;
   padding: 5rem 0;
 `;
 
-const HomeCommunityHeader = styled.header`
+export const HomeCommunityHeader = styled.header`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -294,6 +391,17 @@ const Test = () => {
             </p>
             <button>Get Started</button>
           </HomeIntroContent>
+          <HomeIntroBoxContainer>
+            <div>
+              <span>What We Offer</span>
+            </div>
+            <div>
+              <span>What We Focus</span>
+            </div>
+            <div>
+              <span>Opportunities</span>
+            </div>
+          </HomeIntroBoxContainer>
         </HomeIntroContainer>
         <HomeTopicContainer>
           <h1>

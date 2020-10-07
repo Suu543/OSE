@@ -159,6 +159,14 @@ const CardImage = styled.section`
     width: 100%;
     height: 250px;
   }
+
+  @media all and (min-width: 332px) and (max-width: 476px) {
+    img {
+      margin: auto;
+      width: 80%;
+      height: 220px;
+    }
+  }
 `;
 
 const CardName = styled.section`
