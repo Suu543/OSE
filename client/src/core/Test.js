@@ -223,14 +223,14 @@ export const HomeIntroBoxContainer = styled.article`
   }
 
   @media all and (min-width: 1881px) {
-    width: 50%;
+    width: 55%;
     margin-top: 43vh;
 
     section {
       height: 210px;
 
       span {
-        font-size: 4rem;
+        font-size: 3rem;
       }
     }
   }
@@ -388,6 +388,30 @@ export const HomeDonationContent = styled.article`
     to {
       bottom: -150px;
     }
+  }
+
+  @media all and (min-width: 700px) and (max-width: 910px) {
+    width: 70%;
+    height: 70%;
+    margin: auto;
+  }
+
+  @media all and (min-width: 911px) and (max-width: 1200px) {
+    width: 50%;
+    height: 50%;
+    margin: auto;
+  }
+
+  @media all and (min-width: 1200px) and (max-width: 1439px) {
+    width: 35%;
+    height: 35%;
+    margin: auto;
+  }
+
+  @media all and (min-width: 1440px) {
+    width: 30%;
+    height: 30%;
+    margin: auto;
   }
 `;
 
