@@ -242,7 +242,7 @@ export const HomeTopicContainer = styled.section`
   flex-direction: column;
   align-items: center;
   overflow: hidden;
-  padding: 5rem 0;
+  padding: 5.5rem 0;
 
   h1 {
     font-size: 4rem;
