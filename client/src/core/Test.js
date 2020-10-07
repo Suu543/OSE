@@ -117,17 +117,16 @@ export const HomeIntroContent = styled.article`
 
 export const HomeIntroBoxContainer = styled.article`
   width: 100%;
-  height: 35vh;
   display: flex;
   align-items: flex-end;
   margin: auto;
-  /* margin-top: 1vh; */
+  margin-top: 48vh;
   position: flex;
   justify-content: space-between;
   position: relative;
   z-index: 5;
 
-  div {
+  section {
     flex: 0 0 auto;
     min-height: 100px;
     opacity: 0.9;
@@ -380,6 +379,17 @@ const Test = () => {
             <div></div>
             <div></div>
             <div></div>
+            <HomeIntroBoxContainer>
+              <section>
+                <span>What We Offer</span>
+              </section>
+              <section>
+                <span>What We Focus</span>
+              </section>
+              <section>
+                <span>Opportunities</span>
+              </section>
+            </HomeIntroBoxContainer>
           </HomeIntroBackground>
           <HomeIntroContent>
             <h1>
@@ -391,17 +401,6 @@ const Test = () => {
             </p>
             <button>Get Started</button>
           </HomeIntroContent>
-          <HomeIntroBoxContainer>
-            <div>
-              <span>What We Offer</span>
-            </div>
-            <div>
-              <span>What We Focus</span>
-            </div>
-            <div>
-              <span>Opportunities</span>
-            </div>
-          </HomeIntroBoxContainer>
         </HomeIntroContainer>
         <HomeTopicContainer>
           <h1>
