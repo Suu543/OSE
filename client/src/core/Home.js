@@ -127,6 +127,12 @@ export const HomeIntroContent = styled.article`
       font-size: 3rem;
     }
   }
+
+  @media all and (min-width: 1881px) {
+    button {
+      width: 30%;
+    }
+  }
 `;
 
 export const HomeIntroBoxContainer = styled.article`

@@ -418,6 +418,12 @@ const SingleTopicBlogCard = styled.section`
     font-size: 1.2rem;
   }
 
+  @media all and (min-width: 1151px) {
+    img {
+      max-height: 165px;
+    }
+  }
+
   @media all and (max-width: 1150px) and (min-width: 1001px) {
     h1 {
       font-size: 2.5rem;
