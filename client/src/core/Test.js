@@ -196,9 +196,9 @@ export const HomeIntroBoxContainer = styled.article`
     }
   }
 
-  @media all and (min-width: 1440px) and (max-width: 1880px) {
+  @media all and (min-width: 1440px) and (max-width: 1660px) {
     width: 55%;
-    margin-top: 42vh;
+    margin-top: 45vh;
 
     section {
       height: 190px;
@@ -209,9 +209,22 @@ export const HomeIntroBoxContainer = styled.article`
     }
   }
 
+  @media all and (min-width: 1660px) and (max-width: 1881px) {
+    width: 55%;
+    margin-top: 45vh;
+
+    section {
+      height: 200px;
+
+      span {
+        font-size: 3rem;
+      }
+    }
+  }
+
   @media all and (min-width: 1881px) {
     width: 50%;
-    margin-top: 40vh;
+    margin-top: 43vh;
 
     section {
       height: 210px;
