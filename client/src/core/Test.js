@@ -117,15 +117,15 @@ export const HomeIntroContent = styled.article`
 
 export const HomeIntroBoxContainer = styled.article`
   width: 100%;
+  height: 35vh;
   display: flex;
-  align-content: center;
+  align-items: flex-end;
   margin: auto;
-  margin-top: 1vh;
+  /* margin-top: 1vh; */
   position: flex;
   justify-content: space-between;
   position: relative;
   z-index: 5;
-  top: 17vh;
 
   div {
     flex: 0 0 auto;
@@ -143,7 +143,7 @@ export const HomeIntroBoxContainer = styled.article`
     }
   }
 
-  @media all and (min-width: 332px) and (max-width: 476px) {
+  /* @media all and (min-width: 332px) and (max-width: 476px) {
     width: 90%;
     top: 20vh;
   }
@@ -210,7 +210,7 @@ export const HomeIntroBoxContainer = styled.article`
         font-size: 4rem;
       }
     }
-  }
+  } */
 `;
 
 export const HomeTopicContainer = styled.section`
