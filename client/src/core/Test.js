@@ -74,7 +74,7 @@ export const HomeIntroBackground = styled.article`
 export const HomeIntroContent = styled.article`
   width: 100%;
   position: relative;
-  top: 17vh;
+  top: 15vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -112,6 +112,20 @@ export const HomeIntroContent = styled.article`
     color: #47715d;
     font-weight: 500;
     margin-left: 1rem;
+  }
+
+  @media all and (min-width: 800px) {
+    h1 {
+      font-size: 5rem;
+
+      span {
+        font-size: 7rem;
+      }
+    }
+
+    p {
+      font-size: 3rem;
+    }
   }
 `;
 
