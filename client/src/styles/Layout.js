@@ -131,7 +131,7 @@ export const NavbarRight = styled.section`
     position: absolute;
     z-index: 100;
     left: 0;
-    top: 32vh;
+    top: 27.5vh;
     background: white;
     width: 100%;
     animation: ${(props) => (props.open ? "leftToRight 0.6s ease-in-out" : "")};

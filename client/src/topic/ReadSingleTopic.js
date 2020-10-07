@@ -16,6 +16,10 @@ const SingleTopicContainer = styled.section`
     margin: auto;
     padding: 0.5rem;
     margin-top: 10vh;
+
+    @media all and (max-width: 1000px) {
+      width: 90%;
+    }
   }
 `;
 
@@ -25,6 +29,10 @@ const SingleTopicHeaderContainer = styled.section`
   background: #ffd3d5;
   min-height: 60vh;
   grid-template-columns: 6fr 6fr;
+
+  @media all and (max-width: 1000px) {
+    grid-template-columns: 12fr;
+  }
 `;
 
 const SingleTopicHeaderLeft = styled.section`
@@ -86,6 +94,36 @@ const SingleTopicHeaderLeft = styled.section`
       text-transform: uppercase;
     }
   }
+
+  @media all and (max-width: 1000px) {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+
+    h1 {
+      margin-top: 5rem;
+      font-size: 5rem;
+    }
+
+    p {
+      width: 80%;
+      margin: auto;
+    }
+
+    section {
+      display: none;
+      align-items: center;
+      justify-content: center;
+
+      input {
+        width: 65%;
+      }
+
+      button {
+        width: 25%;
+      }
+    }
+  }
 `;
 
 const SingleTopicHeaderRight = styled.section`
@@ -99,6 +137,12 @@ const SingleTopicHeaderRight = styled.section`
     display: block;
     width: 50%;
     height: 50%;
+  }
+
+  @media all and (max-width: 1000px) {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
@@ -121,6 +165,14 @@ const SingleTopicLatestWrapper = styled.section`
     "FirstCard FirstCard"
     "SecondCard ThirdCard";
   gap: 3rem;
+
+  @media all and (max-width: 1000px) {
+    grid-template-columns: 12fr;
+    grid-template-areas:
+      "FirstCard"
+      "SecondCard"
+      "ThirdCard";
+  }
 `;
 
 const SingleTopicLatestFirstCard = styled.section`
@@ -130,6 +182,13 @@ const SingleTopicLatestFirstCard = styled.section`
   width: 100%;
   background-color: white;
   border-radius: 1px solid white;
+
+  @media all and (max-width: 1000px) {
+    grid-template-columns: 12fr;
+    grid-template-areas:
+      "Image"
+      "Content";
+  }
 `;
 
 const SingleTopicLatestFirstCardContent = styled.section`
@@ -157,6 +216,28 @@ const SingleTopicLatestFirstCardContent = styled.section`
     font-size: 1.6rem;
     color: rgb(85, 90, 110);
   }
+
+  a {
+    color: black;
+  }
+
+  @media all and (max-width: 1000px) {
+    width: 100%;
+    grid-area: Content;
+
+    h1 {
+      font-size: 3.5rem;
+      text-transform: capitalize;
+    }
+
+    p {
+      font-size: 2.2rem;
+    }
+
+    h6 {
+      display: none;
+    }
+  }
 `;
 
 const SingleTopicLatestFirstCardImage = styled.section`
@@ -166,6 +247,13 @@ const SingleTopicLatestFirstCardImage = styled.section`
     display: block;
     width: 93%;
     margin-left: auto;
+  }
+
+  @media all and (max-width: 1000px) {
+    img {
+      width: 100%;
+      grid-area: Image;
+    }
   }
 `;
 
@@ -190,6 +278,27 @@ const SingleTopicLatestSecondCard = styled.section`
   p {
     font-size: 1.5rem;
     color: rgb(85, 90, 110);
+  }
+
+  a {
+    color: black;
+  }
+
+  @media all and (max-width: 1000px) {
+    h1,
+    p,
+    img {
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      text-transform: capitalize;
+    }
+
+    p {
+      font-size: 2.2rem;
+    }
   }
 `;
 
@@ -219,6 +328,27 @@ const SingleTopicLatestThirdCard = styled.section`
     width: 95%;
     margin-left: auto;
   }
+
+  a {
+    color: black;
+  }
+
+  @media all and (max-width: 1000px) {
+    h1,
+    p,
+    img {
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      text-transform: capitalize;
+    }
+
+    p {
+      font-size: 2.2rem;
+    }
+  }
 `;
 
 const SingleTopicBlogsContainer = styled.section`
@@ -226,6 +356,10 @@ const SingleTopicBlogsContainer = styled.section`
   margin: auto;
   margin-top: 2vh;
   min-height: 10vh;
+
+  @media all and (max-width: 1000px) {
+    width: 90%;
+  }
 `;
 
 const SingleTopicBlogsTitle = styled.h1`
@@ -234,6 +368,11 @@ const SingleTopicBlogsTitle = styled.h1`
   font-weight: 600;
   color: black;
   margin-bottom: 8vh;
+
+  @media all and (max-width: 1000px) {
+    font-size: 5rem;
+    width: 80%;
+  }
 `;
 
 const SingleTopicBlogWrapper = styled.section`
@@ -242,6 +381,17 @@ const SingleTopicBlogWrapper = styled.section`
   grid-template-columns: 4fr 4fr 4fr;
   gap: 4rem;
   justify-content: space-around;
+
+  @media all and (max-width: 1150px) and (min-width: 1001px) {
+    display: grid;
+    grid-template-columns: 6fr 6fr;
+  }
+
+  @media all and (max-width: 1000px) {
+    display: grid;
+    grid-template-columns: 12fr;
+    justify-content: center;
+  }
 `;
 
 const SingleTopicBlogCard = styled.section`
@@ -252,7 +402,7 @@ const SingleTopicBlogCard = styled.section`
 
   a {
     color: black;
-    text-decoration: none;
+    /*    text-decoration: none; */
   }
 
   img {
@@ -261,11 +411,37 @@ const SingleTopicBlogCard = styled.section`
   }
 
   h1 {
-    font-size: 1.6rem;
+    font-size: 2rem;
   }
 
   p {
     font-size: 1.2rem;
+  }
+
+  @media all and (max-width: 1150px) and (min-width: 1001px) {
+    h1 {
+      font-size: 2.5rem;
+      text-transform: capitalize;
+    }
+
+    p {
+      font-size: 1.5rem;
+      opacity: 0.7;
+    }
+  }
+
+  @media all and (max-width: 1000px) {
+    width: 100%;
+
+    h1 {
+      font-size: 3rem;
+      text-transform: capitalize;
+    }
+
+    p {
+      font-size: 2rem;
+      opacity: 0.7;
+    }
   }
 `;
 
@@ -341,7 +517,9 @@ const ReadSingleTopic = () => {
                     <SingleTopicLatestFirstCard>
                       <SingleTopicLatestFirstCardContent>
                         <h6>{b.tags[0].name}</h6>
-                        <h1>{b.title}</h1>
+                        <Link to={`/blogs/${b.slug}`}>
+                          <h1>{b.title}</h1>
+                        </Link>
                         <p>{b.excerpt}</p>
                       </SingleTopicLatestFirstCardContent>
                       <SingleTopicLatestFirstCardImage>
@@ -355,7 +533,9 @@ const ReadSingleTopic = () => {
                   return (
                     <SingleTopicLatestSecondCard>
                       <img src={`${b.image.url}`} />
-                      <h1>{b.title}</h1>
+                      <Link to={`/blogs/${b.slug}`}>
+                        <h1>{b.title}</h1>
+                      </Link>
                       <p>{b.excerpt}</p>
                     </SingleTopicLatestSecondCard>
                   );
@@ -365,7 +545,9 @@ const ReadSingleTopic = () => {
                   return (
                     <SingleTopicLatestThirdCard>
                       <img src={`${b.image.url}`} />
-                      <h1>{b.title}</h1>
+                      <Link to={`/blogs/${b.slug}`}>
+                        <h1>{b.title}</h1>
+                      </Link>
                       <p>{b.excerpt}</p>
                     </SingleTopicLatestThirdCard>
                   );
