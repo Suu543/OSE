@@ -23,6 +23,7 @@ import ReadSingleTopic from "./topic/ReadSingleTopic";
 // Blog
 import CreateBlog from "./blog/CreateBlog";
 import ReadBlog from "./blog/ReadBlog";
+import LayoutTest from "./core/LayoutTest";
 
 const GlobalStyle = createGlobalStyle`
     * {
@@ -54,6 +55,7 @@ const Routes = () => {
         <AdminRoute path="/admin/blog/create" exact component={CreateBlog} />
         <Route path="/auth/password/forgot" exact component={Forgot} />
         <Route path="/auth/password/reset/:token" exact component={Reset} />
+        <Route paht="/test-layout" exact component={LayoutTest} />
       </Switch>
     </BrowserRouter>
   );

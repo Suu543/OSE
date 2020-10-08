@@ -1,5 +1,25 @@
 import styled from "styled-components";
 
+// export const Navbar = styled.nav`
+//   position: fixed;
+//   left: 0;
+//   top: 0;
+//   right: 0;
+//   bottom: auto;
+//   display: flex;
+//   height: 70px;
+
+//   @media all and (max-width: 767px) {
+//     height: 60px;
+//   }
+
+//   /* :before {
+
+//   } */
+// `;
+
+// export const NavbarWrapper = styled.section``
+
 export const Navbar = styled.nav`
   /* opacity: ${({ axisy }) =>
     axisy < 10

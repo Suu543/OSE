@@ -24,6 +24,7 @@ const CardSliderContainer = styled.section`
       white 15%,
       rgba(255, 255, 255, 0) 100%
     );
+
     position: absolute;
     top: 0;
     left: 0;

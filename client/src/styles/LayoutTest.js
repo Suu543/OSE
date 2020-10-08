@@ -1,0 +1,280 @@
+import styled from "styled-components";
+
+export const Navbar = styled.nav`
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: auto;
+  display: flex;
+  height: 70px;
+  width: 100%;
+
+  @media all and (max-width: 767px) {
+    height: 60px;
+  }
+`;
+
+export const NavbarBackground = styled.div`
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  width: 100%;
+  background: none;
+  /* background: url("https://ose.s3.ap-northeast-2.amazonaws.com/static/background.svg"); */
+  /* box-shadow: 0 12px 24px -4px rgba(0, 0, 0, 0.08); */
+  height: 70px;
+  /* opacity: ${({ axisy }) =>
+    axisy < 10
+      ? 0
+      : axisy < 20
+      ? 0.2
+      : axisy < 30
+      ? 0.3
+      : axisy < 40
+      ? 0.5
+      : axisy < 50
+      ? 0.6
+      : axisy < 60
+      ? 0.7
+      : axisy < 70
+      ? 0.8
+      : axisy < 90
+      ? 0.9
+      : 1}; */
+
+  &:before {
+    position: absolute;
+    top: 0;
+    background: url("https://ose.s3.ap-northeast-2.amazonaws.com/static/background.svg");
+    z-index: 10;
+    width: 100vw;
+    height: 70px;
+  }
+`;
+
+export const NavbarWrapper = styled.div`
+  width: 80%;
+  margin: auto;
+  display: flex;
+`;
+
+// export const NavbarWrapper = styled.section``
+
+// export const Navbar = styled.nav`
+/* opacity: ${({ axisy }) =>
+    axisy < 10
+      ? 0
+      : axisy < 20
+      ? 0.2
+      : axisy < 30
+      ? 0.3
+      : axisy < 40
+      ? 0.5
+      : axisy < 50
+      ? 0.6
+      : axisy < 60
+      ? 0.7
+      : axisy < 70
+      ? 0.8
+      : axisy < 90
+      ? 0.9
+      : 1}; */
+
+//   width: 100%;
+//   margin: auto;
+//   position: sticky;
+//   top: 0;
+//   z-index: 9999;
+//   display: grid;
+//   grid-template-columns: 3fr 6fr 3fr;
+//   background-color: white;
+//   box-shadow: 2px 12px 6px -6px #777;
+//   display: none;
+
+//   @media all and (max-width: 995px) {
+//     grid-template-columns: 12fr;
+//   }
+// `;
+
+// export const NavbarLeft = styled.section`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   list-style: none;
+
+//   h1 {
+//     font-size: 5rem;
+//     text-align: center;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+
+//     a {
+//       display: inline-block;
+//       /* width: 7rem;
+//       height: 7rem; */
+//       height: 9vh;
+//       width: 20vh;
+//       text-decoration: none;
+//       color: #588a72;
+//       background: url("https://ose.s3.ap-northeast-2.amazonaws.com/static/%EB%A1%9C%EA%B3%A0-%EA%B2%B0%EC%A0%95.png")
+//         no-repeat;
+//       background-size: contain;
+//       background-position: center;
+//     }
+//   }
+
+//   @media all and (max-width: 995px) {
+//     display: grid;
+//     grid-template-columns: 6fr 6fr;
+//   }
+// `;
+
+// export const NavbarCenter = styled.section`
+//   display: flex;
+//   justify-content: space-evenly;
+//   align-items: center;
+//   list-style: none;
+
+//   li {
+//     font-size: 2rem;
+
+//     a {
+//       text-decoration: none;
+//       color: black;
+//     }
+//   }
+
+//   @media all and (max-width: 995px) {
+//     display: ${(props) => (props.open ? "flex" : "none")};
+//     flex-direction: column;
+//     margin-top: 1rem;
+//     position: absolute;
+//     left: 0;
+//     top: 7vh;
+//     z-index: 100;
+//     width: 100%;
+//     /* background: white; */
+//     animation: ${(props) => (props.open ? "rightToLeft 0.6s ease-in-out" : "")};
+
+//     li {
+//       width: 100%;
+//       padding: 1rem;
+//       font-size: 1.5rem;
+//     }
+
+//     @keyframes rightToLeft {
+//       from {
+//         left: 500px;
+//       }
+
+//       to {
+//         left: 0;
+//       }
+//     }
+//   }
+// `;
+
+// export const NavbarRight = styled.section`
+//   display: flex;
+//   align-items: center;
+//   justify-content: flex-start;
+//   list-style: none;
+
+//   li {
+//     font-size: 2rem;
+//     margin-left: 1.5rem;
+//     color: black;
+
+//     a {
+//       color: black;
+//       text-decoration: none;
+//     }
+//   }
+
+//   li:nth-child(2),
+//   button {
+//     display: inline-block;
+//     background: #588a72;
+//     color: white;
+//     padding: 1rem;
+//     font-size: 1.5rem;
+//     color: white;
+//     border: none;
+//     margin-left: 1rem;
+//   }
+
+//   @media all and (max-width: 995px) {
+//     display: ${(props) => (props.open ? "flex" : "none")};
+//     flex-direction: column;
+//     position: absolute;
+//     z-index: 100;
+//     left: 0;
+//     top: 27.5vh;
+//     background: white;
+//     width: 100%;
+//     animation: ${(props) => (props.open ? "leftToRight 0.6s ease-in-out" : "")};
+
+//     li {
+//       width: 100%;
+//       padding: 1rem;
+//       font-size: 1.5rem;
+//     }
+
+//     li:nth-child(2),
+//     button {
+//       width: 90%;
+//       margin: 1rem auto;
+//       text-align: center;
+//     }
+
+//     @keyframes leftToRight {
+//       from {
+//         left: -500px;
+//       }
+
+//       to {
+//         left: 0;
+//       }
+//     }
+//   }
+// `;
+
+// export const NavbarRightHamburger = styled.section`
+//   display: none;
+
+//   @media all and (max-width: 995px) {
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     justify-content: center;
+
+//     span {
+//       display: block;
+//       width: 3rem;
+//       font-weight: bolder;
+//       height: 4px;
+//       background: #2b1700;
+//       border-radius: 3px;
+//       margin-top: 7px;
+//       transition: all ease 0.5s;
+//     }
+
+//     span:nth-child(1) {
+//       transform: ${(props) => (props.open ? "rotate(360deg)" : "")};
+//     }
+
+//     span:nth-child(2) {
+//       transition: ${(props) => (props.open ? "width" : "")};
+//       width: ${(props) => (props.open ? "2rem" : "3rem")};
+//       transform: ${(props) => (props.open ? "translateX(0.6rem)" : "")};
+//     }
+//   }
+// `;
+
+// export const Container = styled.article`
+//   width: 100%;
+// `;

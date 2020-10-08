@@ -10,13 +10,13 @@ export const HomeContainer = styled.main`
 export const HomeIntroContainer = styled.section`
   width: 100%;
   height: 60vh;
+  background: url("https://ose.s3.ap-northeast-2.amazonaws.com/static/background.svg");
   position: relative;
 `;
 
 export const HomeIntroBackground = styled.article`
   width: 100%;
   height: 60vh;
-  background: url("https://assets.website-files.com/5e966657bfb4cd1e103e404b/5ed9f19855b72c47bb1a7533_home%20bg.svg");
   position: absolute;
 
   div {
