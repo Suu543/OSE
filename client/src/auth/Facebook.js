@@ -1,6 +1,11 @@
 import React from "react";
+import styled from "styled-components";
 import FacebookLogin from "react-facebook-login/dist/facebook-login-render-props";
 import axios from "axios";
+
+const FacebookWrapper = styled.section`
+  width: 100%;
+`;
 
 const Facebook = ({ informParent = (f) => f }) => {
   const responseFacebook = (response) => {
@@ -22,7 +27,7 @@ const Facebook = ({ informParent = (f) => f }) => {
   };
 
   return (
-    <div className="pb-3">
+    <FacebookWrapper>
       <FacebookLogin
         appId={`${process.env.REACT_APP_FACEBOOK_APP_ID}`}
         autoLoad={false}
@@ -36,7 +41,7 @@ const Facebook = ({ informParent = (f) => f }) => {
           </button>
         )}
       />
-    </div>
+    </FacebookWrapper>
   );
 };
 

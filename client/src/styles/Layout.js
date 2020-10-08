@@ -9,7 +9,7 @@ export const Navbar = styled.nav`
   display: grid;
   grid-template-columns: 3fr 6fr 3fr;
   background-color: white;
-  box-shadow: 0 10px 6px -6px #777;
+  box-shadow: 2px 12px 6px -6px #777;
 
   @media all and (max-width: 995px) {
     grid-template-columns: 12fr;
