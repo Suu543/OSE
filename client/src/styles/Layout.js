@@ -1,6 +1,25 @@
 import styled from "styled-components";
 
 export const Navbar = styled.nav`
+  /* opacity: ${({ axisy }) =>
+    axisy < 10
+      ? 0
+      : axisy < 20
+      ? 0.2
+      : axisy < 30
+      ? 0.3
+      : axisy < 40
+      ? 0.5
+      : axisy < 50
+      ? 0.6
+      : axisy < 60
+      ? 0.7
+      : axisy < 70
+      ? 0.8
+      : axisy < 90
+      ? 0.9
+      : 1}; */
+
   width: 100%;
   margin: auto;
   position: sticky;
@@ -8,9 +27,9 @@ export const Navbar = styled.nav`
   z-index: 9999;
   display: grid;
   grid-template-columns: 3fr 6fr 3fr;
-  /* background-color: white; */
+  background-color: white;
   box-shadow: 2px 12px 6px -6px #777;
-  background: url("https://assets.website-files.com/5e966657bfb4cd1e103e404b/5ed9f19855b72c47bb1a7533_home%20bg.svg");
+  display: none;
 
   @media all and (max-width: 995px) {
     grid-template-columns: 12fr;

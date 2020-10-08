@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { isAuth, signout } from "../auth/helpers";
+import useScroll from "../helpers/useScroll";
 import {
   Navbar,
   NavbarLeft,
@@ -12,9 +13,10 @@ import {
 
 const Layout = ({ children, match, history }) => {
   const [open, setOpen] = useState(false);
+  const { axisy } = useScroll();
 
   const nav = () => (
-    <Navbar open={open}>
+    <Navbar axisy={axisy} open={open}>
       <NavbarLeft>
         <h1>
           <Link to="/"></Link>
