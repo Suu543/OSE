@@ -16,7 +16,7 @@ export const HomeIntroContainer = styled.section`
 export const HomeIntroBackground = styled.article`
   width: 100%;
   height: 60vh;
-  background: #47715d;
+  background: url("https://assets.website-files.com/5e966657bfb4cd1e103e404b/5ed9f19855b72c47bb1a7533_home%20bg.svg");
   position: absolute;
 
   div {
@@ -81,8 +81,8 @@ export const HomeIntroContent = styled.article`
   align-items: center;
 
   h1 {
-    font-size: 4rem;
-    color: white;
+    font-size: 5rem;
+    color: #083741;
     letter-spacing: 3px;
     margin-bottom: 2rem;
     font-weight: 700;
@@ -95,9 +95,9 @@ export const HomeIntroContent = styled.article`
   p {
     width: 100%;
     text-align: center;
-    font-size: 2.7rem;
+    font-size: 2rem;
     font-weight: 600;
-    color: white;
+    color: #083741;
     margin: auto;
   }
 
@@ -149,9 +149,9 @@ export const HomeIntroBoxContainer = styled.article`
   section {
     flex: 0 0 auto;
     min-height: 120px;
-    opacity: 0.9;
+    opacity: 0.8;
     width: 30%;
-    background: #99c7ad;
+    background: #215c51;
     color: white;
     display: flex;
     align-items: center;

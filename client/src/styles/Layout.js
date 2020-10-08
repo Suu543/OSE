@@ -1,15 +1,16 @@
 import styled from "styled-components";
 
 export const Navbar = styled.nav`
-  max-height: 8.5vh;
   width: 100%;
   margin: auto;
-  position: fixed;
-  z-index: 11;
+  position: sticky;
+  top: 0;
+  z-index: 9999;
   display: grid;
   grid-template-columns: 3fr 6fr 3fr;
-  background-color: white;
+  /* background-color: white; */
   box-shadow: 2px 12px 6px -6px #777;
+  background: url("https://assets.website-files.com/5e966657bfb4cd1e103e404b/5ed9f19855b72c47bb1a7533_home%20bg.svg");
 
   @media all and (max-width: 995px) {
     grid-template-columns: 12fr;
@@ -75,7 +76,7 @@ export const NavbarCenter = styled.section`
     top: 7vh;
     z-index: 100;
     width: 100%;
-    background: white;
+    /* background: white; */
     animation: ${(props) => (props.open ? "rightToLeft 0.6s ease-in-out" : "")};
 
     li {
