@@ -6,58 +6,143 @@ export const Navbar = styled.nav`
   top: 0;
   right: 0;
   bottom: auto;
+  z-index: 999;
   display: flex;
-  height: 70px;
+  height: 90px;
   width: 100%;
 
   @media all and (max-width: 767px) {
-    height: 60px;
+    height: 80px;
   }
-`;
-
-export const NavbarBackground = styled.div`
-  position: absolute;
-  left: 0;
-  top: 0;
-  right: 0;
-  width: 100%;
-  background: none;
-  /* background: url("https://ose.s3.ap-northeast-2.amazonaws.com/static/background.svg"); */
-  /* box-shadow: 0 12px 24px -4px rgba(0, 0, 0, 0.08); */
-  height: 70px;
-  /* opacity: ${({ axisy }) =>
-    axisy < 10
-      ? 0
-      : axisy < 20
-      ? 0.2
-      : axisy < 30
-      ? 0.3
-      : axisy < 40
-      ? 0.5
-      : axisy < 50
-      ? 0.6
-      : axisy < 60
-      ? 0.7
-      : axisy < 70
-      ? 0.8
-      : axisy < 90
-      ? 0.9
-      : 1}; */
 
   &:before {
+    content: "";
     position: absolute;
     top: 0;
-    background: url("https://ose.s3.ap-northeast-2.amazonaws.com/static/background.svg");
-    z-index: 10;
-    width: 100vw;
-    height: 70px;
+    left: 0;
+    z-index: 5;
+    width: 100%;
+    height: 90px;
+    background-color: #fff;
+    box-shadow: 0 12px 24px -4px rgba(0, 0, 0, 0.08);
+    opacity: ${({ axisy }) =>
+      axisy < 10
+        ? 0
+        : axisy < 20
+        ? 0.2
+        : axisy < 30
+        ? 0.3
+        : axisy < 40
+        ? 0.5
+        : axisy < 50
+        ? 0.6
+        : axisy < 60
+        ? 0.7
+        : axisy < 70
+        ? 0.8
+        : axisy < 90
+        ? 0.9
+        : 1};
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 90px;
+    background-color: #fff;
+    box-shadow: 0 12px 24px -4px rgba(0, 0, 0, 0.08);
+    opacity: ${({ axisy }) =>
+      axisy < 30
+        ? 0
+        : axisy < 50
+        ? 0.2
+        : axisy < 60
+        ? 0.3
+        : axisy < 70
+        ? 0.5
+        : axisy < 80
+        ? 0.6
+        : axisy < 90
+        ? 0.7
+        : axisy < 100
+        ? 0.8
+        : axisy < 110
+        ? 0.9
+        : 1};
   }
 `;
 
 export const NavbarWrapper = styled.div`
-  width: 80%;
+  width: 70%;
   margin: auto;
   display: flex;
+  display: relative;
+  z-index: 999;
+`;
+
+export const NavbarLogoWrapper = styled.div`
+  flex: 1 1 2rem;
+  display: relative;
+
+  h1 {
+    font-size: 5rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    a {
+      display: inline-block;
+
+      height: 90px;
+      width: 20vh;
+      text-decoration: none;
+      color: #588a72;
+      background: url("https://ose.s3.ap-northeast-2.amazonaws.com/static/%EB%A1%9C%EA%B3%A0-%EA%B2%B0%EC%A0%95.png")
+        no-repeat;
+      background-size: contain;
+      background-position: center;
+    }
+  }
+`;
+
+export const NavbarLinksWrapper = styled.div`
+  flex: 2 1 2rem;
+
+  display: flex;
+  list-style: none;
+  justify-content: space-around;
+  align-items: center;
+
+  li {
+    font-size: 2rem;
+
+    a {
+      text-decoration: none;
+      color: #083741;
+      font-size: 2rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+  }
+
+  li:nth-child(6) {
+    background: #efa618;
+    padding: 1.5rem;
+    border-radius: 30px;
+
+    a {
+      color: #ffffff;
+    }
+  }
+`;
+
+export const Container = styled.article`
+  width: 100%;
 `;
 
 // export const NavbarWrapper = styled.section``

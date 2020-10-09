@@ -2,16 +2,47 @@ import React, { useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { isAuth, signout } from "../auth/helpers";
 import useScroll from "../helpers/useScroll";
-import { Navbar, NavbarBackground, NavbarWrapper } from "../styles/LayoutTest";
+import {
+  Navbar,
+  NavbarWrapper,
+  NavbarLogoWrapper,
+  NavbarLinksWrapper,
+  Container,
+} from "../styles/LayoutTest";
 
 const LayoutTest = ({ children, match, history }) => {
   const [open, setOpen] = useState(false);
   const { axisy } = useScroll();
 
   const nav = () => (
-    <Navbar>
-      <NavbarBackground axisy={axisy}></NavbarBackground>
-      <h1>Hello</h1>
+    <Navbar axisy={axisy}>
+      <NavbarWrapper>
+        <NavbarLogoWrapper>
+          <h1>
+            <a></a>
+          </h1>
+        </NavbarLogoWrapper>
+        <NavbarLinksWrapper>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+          <li>
+            <Link to="/community">Community</Link>
+          </li>
+          <li>
+            <Link to="/blogs">Blog</Link>
+          </li>
+          <li>
+            <Link to="/donate">Donate</Link>
+          </li>
+          <li>
+            <Link to="/signin">Login</Link>
+          </li>
+          <li>
+            <Link to="/signup">Get Started</Link>
+          </li>
+        </NavbarLinksWrapper>
+      </NavbarWrapper>
     </Navbar>
   );
 
@@ -94,7 +125,12 @@ const LayoutTest = ({ children, match, history }) => {
   //     </Navbar>
   //   );
 
-  return <React.Fragment>{nav()}</React.Fragment>;
+  return (
+    <React.Fragment>
+      {nav()}
+      <Container>{children}</Container>
+    </React.Fragment>
+  );
 };
 
 export default withRouter(LayoutTest);

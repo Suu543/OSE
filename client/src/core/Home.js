@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Layout from "./Layout";
+// import Layout from "./Layout";
+import LayoutTest from "./LayoutTest"
 import TestSlider from "../helpers/TestSlider";
 import styled from "styled-components";
 
@@ -444,7 +445,7 @@ const Home = () => {
   useEffect(() => {}, []);
 
   return (
-    <Layout>
+    <LayoutTest>
       <HomeContainer>
         <HomeIntroContainer>
           <HomeIntroBackground>
@@ -531,7 +532,7 @@ const Home = () => {
           </HomeDonationContent>
         </HomeDonationContainer>
       </HomeContainer>
-    </Layout>
+    </LayoutTest>
   );
 };
 
