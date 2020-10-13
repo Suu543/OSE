@@ -76,11 +76,19 @@ export const Navbar = styled.nav`
 `;
 
 export const NavbarWrapper = styled.div`
-  width: 70%;
+  width: 80%;
   margin: auto;
   display: flex;
   display: relative;
   z-index: 999;
+
+  @media all and (max-width: 1250px) {
+    width: 100%;
+  }
+  
+  @media all and (max-width: 999px) {
+    justify-content: space-around;
+  }
 `;
 
 export const NavbarLogoWrapper = styled.div`
@@ -89,11 +97,10 @@ export const NavbarLogoWrapper = styled.div`
 
   h1 {
     font-size: 5rem;
-    text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 
     a {
       display: inline-block;
@@ -108,15 +115,29 @@ export const NavbarLogoWrapper = styled.div`
       background-position: center;
     }
   }
+
+  @media all and (max-width: 999px) {
+    flex: 1 1 auto;
+  }
 `;
 
 export const NavbarLinksWrapper = styled.div`
-  flex: 2 1 2rem;
+  flex: 5 1 2rem;
 
   display: flex;
   list-style: none;
   justify-content: space-around;
   align-items: center;
+
+  button {
+    border: none;
+    background: none;
+    font-size: 2rem;
+    text-decoration: none;
+    color: #083741;
+    font-weight: 500;
+    cursor: pointer;
+  }
 
   li {
     font-size: 2rem;
@@ -139,7 +160,69 @@ export const NavbarLinksWrapper = styled.div`
       color: #ffffff;
     }
   }
+
+  @media all and (max-width: 1250px) {
+    flex: 8 1 2rem;
+  }
+
+  @media all and (max-width: 1000px){
+    flex: 1 1 auto;
+    display: ${(props) => (props.open ? "flex" : "none")};
+    position: absolute;
+    flex-direction: column;
+    top: 9vh;
+    width: 100%;
+    height: 91vh;
+    background-color: white;
+    animation: ${(props) => (props.open ? "rightToLeft 0.6s ease-in-out" : "")};
+
+    @keyframes rightToLeft {
+      from {
+        left: 500px;
+      }
+
+      to {
+        left: 0;
+      }
+    }
+  }
+
 `;
+
+export const NavbarLinksHamburger = styled.div`
+  display: none;
+
+  @media all and (max-width: 999px) {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    align-items: flex-end;
+    justify-content: center;
+    margin-right: 3rem;
+
+    span {
+      display: block;
+      width: 3rem;
+      font-weight: bolder;
+      height: 4px;
+      background: #2b1700;
+      border-radius: 3px;
+      margin-top: 7px;
+      transition: all ease 0.5s;
+    }
+
+    span:nth-child(1) {
+      transform: ${(props) => (props.open ? "rotate(360deg)" : "")};
+    }
+
+    span:nth-child(2) {
+      transition: ${(props) => (props.open ? "width" : "")};
+      width: ${(props) => (props.open ? "2rem" : "3rem")};
+      transform: ${(props) => (props.open ? "translateX(0.6rem)" : "")};
+    }
+  }
+
+`
 
 export const Container = styled.article`
   width: 100%;

@@ -3,7 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import { isAuth, getCookie, signout, updateUser } from "../auth/helpers";
 import { getProfile, updateAdminProfile } from "../action/auth";
 import { ToastContainer, toast } from "react-toastify";
-import Layout from "../core/Layout";
+import LayoutTest from "../core/LayoutTest";
 import "react-toastify/dist/ReactToastify.min.css";
 
 const Admin = ({ history }) => {
@@ -120,15 +120,14 @@ const Admin = ({ history }) => {
   );
 
   return (
-    <Layout>
+    <LayoutTest>
       <div className="col-md-6 offset-md-3">
         <ToastContainer />
-        {JSON.stringify({ email, password })}
         <h1 className="p-5 text-center">Admin</h1>
         <p className="lead text-center">Profile Update</p>
         {updateForm()}
       </div>
-    </Layout>
+    </LayoutTest>
   );
 };
 

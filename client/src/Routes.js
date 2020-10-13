@@ -25,6 +25,8 @@ import CreateBlog from "./blog/CreateBlog";
 import ReadBlog from "./blog/ReadBlog";
 import LayoutTest from "./core/LayoutTest";
 
+import ScrollToTop from "./helpers/ScrollToTop";
+
 const GlobalStyle = createGlobalStyle`
     * {
       padding: 0;
@@ -41,6 +43,7 @@ const Routes = () => {
   return (
     <BrowserRouter>
       <GlobalStyle />
+      <ScrollToTop />
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/signup" exact component={Signup} />

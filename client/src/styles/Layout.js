@@ -64,7 +64,6 @@ export const NavbarLeft = styled.section`
 
   h1 {
     font-size: 5rem;
-    text-align: center;
     display: flex;
     flex-direction: column;
     justify-content: center;

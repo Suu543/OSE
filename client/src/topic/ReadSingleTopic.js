@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { readBlogsByTopic } from "../action/blog";
 import useReactRouter from "use-react-router";
 import styled from "styled-components";
-import Layout from "../core/Layout";
+import LayoutTest from "../core/LayoutTest";
 
 const SingleTopicContainer = styled.section`
   width: 100%;
@@ -498,7 +498,7 @@ const ReadSingleTopic = () => {
   };
 
   return (
-    <Layout>
+    <LayoutTest>
       <SingleTopicContainer>
         <SingleTopicHeaderContainer>
           <SingleTopicHeaderLeft>
@@ -578,7 +578,7 @@ const ReadSingleTopic = () => {
           </SingleTopicBlogWrapper>
         </SingleTopicBlogsContainer>
       </SingleTopicContainer>
-    </Layout>
+    </LayoutTest>
   );
 };
 

@@ -7,6 +7,7 @@ import {
   NavbarWrapper,
   NavbarLogoWrapper,
   NavbarLinksWrapper,
+  NavbarLinksHamburger,
   Container,
 } from "../styles/LayoutTest";
 
@@ -15,33 +16,104 @@ const LayoutTest = ({ children, match, history }) => {
   const { axisy } = useScroll();
 
   const nav = () => (
-    <Navbar axisy={axisy}>
-      <NavbarWrapper>
+    <Navbar axisy={axisy} open={open}>
+      <NavbarWrapper open={open}>
         <NavbarLogoWrapper>
           <h1>
-            <a></a>
+            <Link to="/"></Link>
           </h1>
         </NavbarLogoWrapper>
-        <NavbarLinksWrapper>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/community">Community</Link>
-          </li>
-          <li>
-            <Link to="/blogs">Blog</Link>
-          </li>
-          <li>
-            <Link to="/donate">Donate</Link>
-          </li>
-          <li>
-            <Link to="/signin">Login</Link>
-          </li>
-          <li>
-            <Link to="/signup">Get Started</Link>
-          </li>
+        {!isAuth() && (
+          <NavbarLinksWrapper open={open}>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/community">Community</Link>
+            </li>
+            <li>
+              <Link to="/blogs">Blog</Link>
+            </li>
+            <li>
+              <Link to="/donate">Donate</Link>
+            </li>
+            <li>
+              <Link to="/signin">Login</Link>
+            </li>
+            <li>
+              <Link to="/signup">Get Started</Link>
+            </li>
         </NavbarLinksWrapper>
+        )}
+
+        {isAuth() && isAuth().role === "user" && (
+          <NavbarLinksWrapper open={open}>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/community">Community</Link>
+            </li>
+            <li>
+              <Link to="/blogs">Blog</Link>
+            </li>
+            <li>
+              <Link to="/donate">Donate</Link>
+            </li>
+            <li>
+              <button
+              onClick={() => {
+                signout(() => {
+                  history.push("/");
+                    });
+                  }}
+              >
+                Signout
+              </button>            
+            </li>
+            <li>
+              <Link to="/user">{isAuth().name}</Link>
+            </li>
+        </NavbarLinksWrapper>
+        )}
+
+        {isAuth() && isAuth().role === "admin" && (
+          <NavbarLinksWrapper open={open}>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+            <li>
+              <Link to="/community">Community</Link>
+            </li>
+            <li>
+              <Link to="/blogs">Blog</Link>
+            </li>
+            <li>
+              <Link to="/donate">Donate</Link>
+            </li>
+            <li>
+              <button
+              onClick={() => {
+                signout(() => {
+                  history.push("/");
+                    });
+                  }}
+              >
+                Signout
+              </button>            
+            </li>
+            <li>
+              <Link to="/admin">{isAuth().name}</Link>
+            </li>
+        </NavbarLinksWrapper>
+        )}
+
+        
+        <NavbarLinksHamburger open={open} onClick={() => setOpen(!open)}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </NavbarLinksHamburger>
       </NavbarWrapper>
     </Navbar>
   );
