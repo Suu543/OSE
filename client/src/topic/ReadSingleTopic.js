@@ -9,7 +9,6 @@ import LayoutTest from "../core/LayoutTest";
 
 const SingleTopicContainer = styled.section`
   width: 100%;
-  padding-top: 9vh;
 
   hr {
     width: 70%;
@@ -27,7 +26,7 @@ const SingleTopicHeaderContainer = styled.section`
   width: 100%;
   display: grid;
   background: #ffd3d5;
-  min-height: 60vh;
+  min-height: 70vh;
   grid-template-columns: 6fr 6fr;
 
   @media all and (max-width: 1000px) {

@@ -377,21 +377,34 @@ export const HomeDonationContent = styled.article`
     justify-content: center;
     width: 50%;
 
-    img:nth-child(1) {
+    img {
       display: block;
+      width: 100%;
+      margin: auto;
+    }
+
+    img:nth-child(1) {
       width: 50%;
       margin: auto;
       position: relative;
-      z-index: -1;
+      z-index: 2;
       animation-duration: 3s;
       animation-name: moveToBox;
       animation-iteration-count: infinite;
     }
 
-    img {
-      display: block;
+    img:nth-child(2) {
       width: 100%;
-      margin: auto;
+      position: relative;
+      top: 200px;
+      background: white;
+      z-index: 1;
+    }
+
+    img:nth-child(3) {
+      width: 100%;
+      position: relative;
+      z-index: 3;
     }
 
     h1 {
@@ -514,7 +527,8 @@ const Home = () => {
           <HomeDonationContent>
             <section>
               <img src="https://ose.s3.ap-northeast-2.amazonaws.com/static/icon_donation_coin.png" />
-              <img src="https://ose.s3.ap-northeast-2.amazonaws.com/static/icon_donation_box.png" />
+              <img src="https://ose.s3.ap-northeast-2.amazonaws.com/static/donation_top.jpg" />
+              <img src="https://ose.s3.ap-northeast-2.amazonaws.com/static/donation_bottom.jpg" />
             </section>
           </HomeDonationContent>
         </HomeDonationContainer>

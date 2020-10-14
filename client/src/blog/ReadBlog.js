@@ -3,7 +3,7 @@ import styled from "styled-components";
 import moment from "moment";
 import { useParams } from "react-router";
 import { readBlog } from "../action/blog";
-import Layout from "../core/Layout";
+import LayoutTest from "../core/LayoutTest";
 
 const BlogContainer = styled.section`
   padding-top: 10vh;
@@ -186,7 +186,7 @@ const ReadBlog = () => {
   };
 
   return (
-    <Layout>
+    <LayoutTest>
       <BlogContainer>
         <BlogWrapper>
           <BlogImage>
@@ -226,7 +226,7 @@ const ReadBlog = () => {
           </Blog>
         </BlogWrapper>
       </BlogContainer>
-    </Layout>
+    </LayoutTest>
   );
 };
 
