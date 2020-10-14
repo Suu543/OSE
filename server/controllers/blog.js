@@ -1,19 +1,20 @@
-const AWS = require("aws-sdk");
-const dotenv = require("dotenv");
-const fileType = require("file-type");
-const { v4: uuidv4 } = require("uuid");
-const formidable = require("formidable");
-const slugify = require("slug");
-const multer = require("multer");
-const multerS3 = require("multer-s3");
-const path = require("path");
+const AWS = require('aws-sdk');
+const dotenv = require('dotenv');
+const fileType = require('file-type');
+const { v4: uuidv4 } = require('uuid');
+const formidable = require('formidable');
+const slugify = require('slug');
+const multer = require('multer');
+const multerS3 = require('multer-s3');
+const path = require('path');
+
 dotenv.config();
 
-const { smartTrim } = require("../helpers/smartTrim");
-const { Blog } = require("../models/Blog");
-const { Tag } = require("../models/Tag");
-const { Topic } = require("../models/Topic");
-const { Reference } = require("../models/Reference");
+const { smartTrim } = require('../helpers/smartTrim');
+const { Blog } = require('../models/Blog');
+const { Tag } = require('../models/Tag');
+const { Topic } = require('../models/Topic');
+const { Reference } = require('../models/Reference');
 // const { worker } = require("cluster");
 
 const s3 = new AWS.S3({
@@ -36,14 +37,14 @@ exports.createBlog = async (req, res) => {
   const saveMultiTags = async (tags) => {
     const jobQuerys = [];
     const arrTagId = [];
-    const splitedTags = tags.split(",");
+    const splitedTags = tags.split(',');
     const allTags = await Tag.find({});
 
     // 요청으로 들어온 태그 중 이미 생성된 태그와 그렇지 않을 태그를 구분 arrTagId에 이미 생성된 태그를 담고, splitedTags 에서 이미 생성된 태그를 제거
     allTags.forEach((tagFromDB) => {
       if (splitedTags.find((tag) => tagFromDB.name == tag)) {
         arrTagId.push(tagFromDB._id);
-        let idx = splitedTags.indexOf(tagFromDB.name);
+        const idx = splitedTags.indexOf(tagFromDB.name);
         splitedTags.splice(idx, 1);
       }
     });
@@ -83,18 +84,17 @@ exports.createBlog = async (req, res) => {
       const dup_checker = acc.find((item) => item.url == current.url);
       if (dup_checker) {
         return acc.concat([current]);
-      } else {
-        return acc;
       }
+      return acc;
     }, []);
 
     return filteredArr;
   };
 
   try {
-    let blog = new Blog();
-    let form = new formidable.IncomingForm();
-    form.encoding = "utf-8";
+    const blog = new Blog();
+    const form = new formidable.IncomingForm();
+    form.encoding = 'utf-8';
     form.multiples = true;
     form.keepExtensions = true;
 
@@ -103,7 +103,7 @@ exports.createBlog = async (req, res) => {
         return res.status(400).json({ error: err });
       }
 
-      console.log("First");
+      console.log('First');
       const {
         title,
         excerpt,
@@ -117,47 +117,47 @@ exports.createBlog = async (req, res) => {
 
       if (!title || title.length < 2) {
         return res.json({
-          error: "Please Enter At Least One Characters...",
+          error: 'Please Enter At Least One Characters...',
         });
       }
 
       if (!excerpt || excerpt < 10) {
         return res.json({
-          error: "Please Enter At Least Ten Characters...",
+          error: 'Please Enter At Least Ten Characters...',
         });
       }
 
       if (!body || body.length < 1) {
-        console.log("body error");
+        console.log('body error');
         return res.json({
-          error: "Please Enter At Least One Character...",
+          error: 'Please Enter At Least One Character...',
         });
       }
 
       if (!topics || topics.length === 0) {
         return res.json({
-          error: "Please Pick At Least One Topic...",
+          error: 'Please Pick At Least One Topic...',
         });
       }
 
       if (!tags || tags.length === 0) {
         return res.json({
-          error: "Please Pick At Least One Tag...",
+          error: 'Please Pick At Least One Tag...',
         });
       }
 
       if (!image || image.length < 1) {
         return res.json({
-          error: "Please Select Main image For this Work...",
+          error: 'Please Select Main image For this Work...',
         });
       }
 
       let imageData = image;
-      if (image.substr(0, 7) === "base64,") {
+      if (image.substr(0, 7) === 'base64,') {
         imageData = image.substr(7, image.length);
       }
 
-      const buffer = Buffer.from(imageData, "base64");
+      const buffer = Buffer.from(imageData, 'base64');
       const fileInfo = await fileType.fromBuffer(buffer);
       const detectedExt = fileInfo.ext;
       const detectedMime = fileInfo.mime;
@@ -171,11 +171,11 @@ exports.createBlog = async (req, res) => {
       const key = `ose/${keyName}.${detectedExt}`;
 
       const params = {
-        Bucket: "ose",
+        Bucket: 'ose',
         Key: key,
         Body: buffer,
-        ACL: "public-read",
-        ContentEncoding: "base64",
+        ACL: 'public-read',
+        ContentEncoding: 'base64',
         ContentType: mime,
       };
 
@@ -184,11 +184,11 @@ exports.createBlog = async (req, res) => {
 
       s3.putObject(params, async (err, data) => {
         if (err) {
-          console.log("Second");
-          return res.status(400).json({ error: "Upload to S3 Failed..." });
+          console.log('Second');
+          return res.status(400).json({ error: 'Upload to S3 Failed...' });
         }
 
-        console.log("Third");
+        console.log('Third');
 
         const url = `https://ose.s3-${process.env.AWS_REGION}.amazonaws.com/${key}`;
 
@@ -200,7 +200,7 @@ exports.createBlog = async (req, res) => {
         blog.body = body;
         // blog.excerpt = smartTrim(excerpt, 150, " ", "...");
         blog.excerpt = excerpt;
-        blog.topics = topics && topics.split(",");
+        blog.topics = topics && topics.split(',');
         blog.tags = tags && blogTags;
         blog.references = blogRefs;
 
@@ -208,26 +208,26 @@ exports.createBlog = async (req, res) => {
           const newBlog = await blog.save();
           return res.status(200).json(newBlog);
         } catch (error) {
-          console.log("Fourth");
+          console.log('Fourth');
           return res.status(400).json({ error });
         }
       });
     });
   } catch (error) {
-    console.log("Fifth", error);
+    console.log('Fifth', error);
     return res.status(400).json({
-      message: error.message || "Failed to upload image...",
+      message: error.message || 'Failed to upload image...',
     });
   }
 };
 
 exports.readBlog = async (req, res) => {
-  const slug = req.params.slug;
+  const { slug } = req.params;
 
   try {
-    let blog = await Blog.findOne({ slug })
-      .populate("topics", "name")
-      .populate("tags", "name");
+    const blog = await Blog.findOne({ slug })
+      .populate('topics', 'name')
+      .populate('tags', 'name');
     return res.status(200).json(blog);
   } catch (error) {
     return res.status(400).json({ error });
@@ -236,14 +236,14 @@ exports.readBlog = async (req, res) => {
 
 exports.uploadS3 = multer({
   storage: multerS3({
-    acl: "public-read",
-    s3: s3,
-    bucket: "ose",
+    acl: 'public-read',
+    s3,
+    bucket: 'ose',
     contentType: multerS3.AUTO_CONTENT_TYPE,
-    metadata: function (req, file, cb) {
+    metadata(req, file, cb) {
       cb(null, { fieldName: file.fieldname });
     },
-    key: function (req, file, cb) {
+    key(req, file, cb) {
       const keyName = uuidv4();
       const extension = path.extname(file.originalname);
       cb(null, `ose/blogBody/${keyName}${extension}`);
@@ -253,7 +253,7 @@ exports.uploadS3 = multer({
 
 exports.upload = async (req, res) => {
   const ref = new Reference();
-  console.log("req.file.key", req.file);
+  console.log('req.file.key', req.file);
   ref.url = req.file.location;
   ref.key = req.file.key;
   const result = await ref.save();
@@ -265,39 +265,39 @@ exports.upload = async (req, res) => {
 };
 
 exports.removeBlog = async (req, res) => {
-  const slug = req.params.slug;
+  const { slug } = req.params;
 
   const deleteimage = async (key) => {
     const deletedParams = {
-      Bucket: "ose",
+      Bucket: 'ose',
       Key: `${key}`,
     };
 
     s3.deleteObject(deletedParams, (err, data) => {
-      if (err) console.log("S3 DELETE ERROR DURING...", err);
-      else console.log("S3 DELETED DURING", data);
+      if (err) console.log('S3 DELETE ERROR DURING...', err);
+      else console.log('S3 DELETED DURING', data);
     });
   };
 
   try {
-    let removedBlog = await Blog.findOneAndRemove({ slug });
-    let removedReferences = removedBlog["references"];
-    let removedimage = removedBlog["image"]["key"];
+    const removedBlog = await Blog.findOneAndRemove({ slug });
+    const removedReferences = removedBlog.references;
+    const removedimage = removedBlog.image.key;
 
     await deleteimage(removedimage);
 
     removedReferences.map(async (ref) => {
-      let deletedRef = await Reference.findByIdAndDelete({ _id: ref });
+      const deletedRef = await Reference.findByIdAndDelete({ _id: ref });
 
       if (deletedRef) {
         const deletedParams = {
-          Bucket: "ose",
-          Key: `${deletedRef["key"]}`,
+          Bucket: 'ose',
+          Key: `${deletedRef.key}`,
         };
 
         s3.deleteObject(deletedParams, (err, data) => {
-          if (err) console.log("S3 DELETE ERROR DURING", err);
-          else console.log("S3 DELETED DURING", data);
+          if (err) console.log('S3 DELETE ERROR DURING', err);
+          else console.log('S3 DELETED DURING', data);
         });
       }
     });
@@ -313,10 +313,10 @@ exports.findByTopic = async (req, res) => {
 
   try {
     const refTopic = await Topic.findOne({ slug });
-    console.log("refTopic", refTopic);
+    console.log('refTopic', refTopic);
     const blogs = await Blog.find({ topics: { $in: refTopic._id } })
-      .populate("topics", "name")
-      .populate("tags", "name");
+      .populate('topics', 'name')
+      .populate('tags', 'name');
 
     return res.status(200).json(blogs);
   } catch (error) {

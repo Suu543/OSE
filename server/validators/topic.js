@@ -1,5 +1,5 @@
-const { check } = require("express-validator");
+const { check } = require('express-validator');
 
 exports.topicCreationValidator = [
-  check("name").not().isEmpty().withMessage("Topic Name is required..."),
+  check('name').not().isEmpty().withMessage('Topic Name is required...'),
 ];

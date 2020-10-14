@@ -1,15 +1,13 @@
-const User = require("../models/User");
+const User = require('../models/User');
 
 exports.read = (req, res) => {
   if (!req.user) {
-    console.log("Read Error", error);
-
     return res.status(400).json({
-      error: "User Not Found...",
+      error: 'User Not Found...',
     });
   }
 
-  let user = req.user;
+  const { user } = req;
 
   user.password = undefined;
   user.tokens = undefined;
@@ -21,7 +19,7 @@ exports.read = (req, res) => {
 exports.update = async (req, res) => {
   // console.log("UPDATE USER - req.user", req.user, "UPDATE DATA", req.body);
   try {
-    console.log("req.user", req.user._id);
+    console.log('req.user', req.user._id);
     const { name, password } = req.body;
 
     const user = await User.findById(req.user._id);
@@ -30,7 +28,7 @@ exports.update = async (req, res) => {
 
     if (name === undefined && password === undefined) {
       return res.status(400).json({
-        error: "name or password required...",
+        error: 'name or password required...',
       });
     }
 
@@ -42,12 +40,12 @@ exports.update = async (req, res) => {
       user.password = password;
     }
 
-    let response = await user.save();
+    const response = await user.save();
 
     return res.status(200).send(response);
   } catch (error) {
     return res.status(400).json({
-      error: "User Not Found...",
+      error: 'User Not Found...',
     });
   }
 };

@@ -1,0 +1,11 @@
+{
+    "editor.formatOnSave": true,
+    "eslint.workingDirectories": [
+        {"mode": "auto"}
+    ],
+    "files.autoSave": "off",
+    "eslint.trace.server": "messages",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+}

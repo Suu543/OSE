@@ -1,17 +1,18 @@
 // Models
-const User = require("../models/User");
 
 // Email
+const AWS = require('aws-sdk');
+const JWT = require('jsonwebtoken');
+const { OAuth2Client } = require('google-auth-library');
+const fetch = require('node-fetch');
+
+const dotenv = require('dotenv');
 const {
   signupEmailParams,
   forgotPasswordEmailParams,
-} = require("../helpers/email");
-const AWS = require("aws-sdk");
-const JWT = require("jsonwebtoken");
-const { OAuth2Client } = require("google-auth-library");
-const fetch = require("node-fetch");
+} = require('../helpers/email');
+const User = require('../models/User');
 
-const dotenv = require("dotenv");
 dotenv.config();
 
 const SES_CONFIG = {
@@ -26,11 +27,11 @@ exports.signup = async (req, res) => {
   const { name, email, password } = req.body;
 
   try {
-    let newUser = await User.findOne({ email });
+    const newUser = await User.findOne({ email });
 
     if (newUser) {
       return res.status(400).json({
-        error: "Already Registered Email...",
+        error: 'Already Registered Email...',
       });
     }
 
@@ -38,7 +39,7 @@ exports.signup = async (req, res) => {
       { name, email, password },
       process.env.JWT_ACCOUNT_ACTIVATION,
       {
-        expiresIn: "10m",
+        expiresIn: '10m',
       }
     );
 
@@ -47,19 +48,19 @@ exports.signup = async (req, res) => {
 
     sendEmailOnSignup
       .then((data) => {
-        console.log("Email Submitted to SES", data);
+        console.log('Email Submitted to SES', data);
         return res.status(200).json({
           message: `Email has been sent to ${email}, Follow the instructions to complete your registration`,
         });
       })
       .catch((error) => {
-        console.log("Registration Error", error);
+        console.log('Registration Error', error);
         return res.status(400).json({
           error: `We could not verify your email. Please try again...`,
         });
       });
   } catch (error) {
-    console.log("Registration Error", error);
+    console.log('Registration Error', error);
     return res.status(400).send(error);
   }
 };
@@ -74,7 +75,7 @@ exports.activateSignup = async (req, res) => {
     if (err) {
       return res
         .status(401)
-        .json({ error: "Expired Link... Please Try Again..." });
+        .json({ error: 'Expired Link... Please Try Again...' });
     }
 
     const { name, email, password } = decoded;
@@ -84,10 +85,10 @@ exports.activateSignup = async (req, res) => {
       await user.save();
       return res
         .status(200)
-        .json({ message: "Registration Success. Please Signin..." });
+        .json({ message: 'Registration Success. Please Signin...' });
     } catch (error) {
       return res.status(401).json({
-        error: "Error Saving User in DB. Please Try Again...",
+        error: 'Error Saving User in DB. Please Try Again...',
       });
     }
   });
@@ -102,35 +103,34 @@ exports.signin = async (req, res) => {
     if (!user) {
       return res
         .status(401)
-        .send({ error: "Login Failed! Check Authentication Credentials" });
+        .send({ error: 'Login Failed! Check Authentication Credentials' });
     }
 
     const token = await user.generateAuthToken();
-    user.resetPasswordLink = "";
-    user.password = "";
-    user.tokens = "";
+    user.resetPasswordLink = '';
+    user.password = '';
+    user.tokens = '';
 
     return res.send({ user, token });
   } catch (error) {
     return res.status(400).json({
       error:
-        "User with that email does not exist. Please Signup or Signin with valid email and password...",
+        'User with that email does not exist. Please Signup or Signin with valid email and password...',
     });
   }
 };
 
-exports.me = async (req, res) => {
+exports.me = async (req, res) =>
   // View Logged in User Profile - user data is assigned to req.user in auth middleware function
-  return res.send(req.user);
-};
+  res.send(req.user);
 
 exports.singleLogout = async (req, res) => {
   // Log user out of the application
   try {
-    req.user.tokens = req.user.tokens.filter((token) => {
-      return token.token != req.token;
-    });
-    let user = await req.user.save();
+    req.user.tokens = req.user.tokens.filter(
+      (token) => token.token != req.token
+    );
+    const user = await req.user.save();
     return res.status(200).send(user);
   } catch (error) {
     return res.status(500).send(error);
@@ -141,7 +141,7 @@ exports.multiLogout = async (req, res) => {
   // Log user out of all devices
   try {
     req.user.tokens.splice(0, req.user.tokens.length);
-    let user = await req.user.save();
+    const user = await req.user.save();
     return res.status(200).send(user);
   } catch (error) {
     return res.status(500).send(error);
@@ -155,14 +155,14 @@ exports.forgotPassword = async (req, res) => {
     const user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({
-        error: "User with this email does not exist...",
+        error: 'User with this email does not exist...',
       });
     }
 
     const token = JWT.sign(
       { _id: user._id, name: user.name },
       process.env.JWT_RESET_PASSWORD,
-      { expiresIn: "10m" }
+      { expiresIn: '10m' }
     );
 
     const params = forgotPasswordEmailParams(email, token);
@@ -172,13 +172,13 @@ exports.forgotPassword = async (req, res) => {
 
     sendResetPasswordEmail
       .then((data) => {
-        console.log("SES Reset Password Success", data);
+        console.log('SES Reset Password Success', data);
         return res.status(200).json({
           message: `Email has been sent to ${email}. Click on the link to reset your password`,
         });
       })
       .catch((error) => {
-        console.log("SES Reset Password Failed", error);
+        console.log('SES Reset Password Failed', error);
       });
   } catch (error) {
     return res.status(400).json({
@@ -199,25 +199,25 @@ exports.resetPassword = (req, res) => {
           if (err) {
             return res
               .status(401)
-              .json({ error: "Invalid Token... Please Try Again..." });
+              .json({ error: 'Invalid Token... Please Try Again...' });
           }
 
           const user = await User.findOne({ resetPasswordLink });
 
           if (!user) {
-            return res.status(400).json({ error: "Not Found User..." });
+            return res.status(400).json({ error: 'Not Found User...' });
           }
 
           user.password = newPassword;
-          user.resetPasswordLink = "";
+          user.resetPasswordLink = '';
           await user.save();
 
           return res.status(200).json({
-            message: "Successfully Changed Password! Please Login Again...",
+            message: 'Successfully Changed Password! Please Login Again...',
           });
         } catch (error) {
           return res.status(400).json({
-            error: "Password Reset Failed... Try Again...",
+            error: 'Password Reset Failed... Try Again...',
           });
         }
       }
@@ -229,16 +229,16 @@ const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 exports.googleLogin = async (req, res) => {
   const { idToken } = req.body;
   try {
-    let response = await client.verifyIdToken({
+    const response = await client.verifyIdToken({
       idToken,
       audience: process.env.GOOGLE_CLIENT_ID,
     });
-    console.log("response", response);
+    console.log('response', response);
 
     const { email_verified, name, email } = response.payload;
     if (email_verified) {
-      let user = await User.findOne({ email });
-      console.log("user", user);
+      const user = await User.findOne({ email });
+      console.log('user', user);
       if (user) {
         try {
           const token = await user.generateAuthToken();
@@ -250,15 +250,15 @@ exports.googleLogin = async (req, res) => {
           });
         } catch (error) {
           return res.status(401).json({
-            error: "Google Login Failed...",
+            error: 'Google Login Failed...',
           });
         }
       } else {
         try {
-          let password = email + process.env.JWT_KEY;
+          const password = email + process.env.JWT_KEY;
           const user = new User({ name, email, password });
           const savedUser = await user.save();
-          console.log("saved", savedUser);
+          console.log('saved', savedUser);
 
           if (savedUser) {
             const token = await savedUser.generateAuthToken();
@@ -272,24 +272,24 @@ exports.googleLogin = async (req, res) => {
           }
         } catch (error) {
           return res.status(401).json({
-            error: "Failed to Signup with Google...",
+            error: 'Failed to Signup with Google...',
           });
         }
       }
     }
   } catch (error) {
-    console.log("error", error);
+    console.log('error', error);
   }
 };
 
 exports.facebookLogin = async (req, res) => {
-  console.log("FACEBOOK LOGIN REQ BODY", req.body);
+  console.log('FACEBOOK LOGIN REQ BODY', req.body);
   const { userID, accessToken } = req.body;
   const url = `https://graph.facebook.com/v8.0/${userID}/?fields=id,name,email&access_token=${accessToken}`;
 
   try {
-    let response = await fetch(url);
-    let userData = await response.json();
+    const response = await fetch(url);
+    const userData = await response.json();
     const { email, name } = userData;
 
     const user = await User.findOne({ email });
@@ -305,15 +305,15 @@ exports.facebookLogin = async (req, res) => {
         });
       } catch (error) {
         return res.status(401).json({
-          error: "Facebook Login Failed...",
+          error: 'Facebook Login Failed...',
         });
       }
     } else {
       try {
-        let password = email + process.env.JWT_KEY;
+        const password = email + process.env.JWT_KEY;
         const user = new User({ name, email, password });
         const savedUser = await user.save();
-        console.log("saved", savedUser);
+        console.log('saved', savedUser);
 
         if (savedUser) {
           const token = await savedUser.generateAuthToken();
@@ -327,13 +327,13 @@ exports.facebookLogin = async (req, res) => {
         }
       } catch (error) {
         return res.status(401).json({
-          error: "Failed to Signup with Facebook...",
+          error: 'Failed to Signup with Facebook...',
         });
       }
     }
   } catch (error) {
     return res.json({
-      error: "Facebook Login Failed... Try Again...",
+      error: 'Facebook Login Failed... Try Again...',
     });
   }
 };

@@ -1,4 +1,5 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
+
 const { ObjectId } = mongoose.Schema;
 
 const blogSchema = new mongoose.Schema(
@@ -39,31 +40,31 @@ const blogSchema = new mongoose.Schema(
     topics: [
       {
         type: ObjectId,
-        ref: "Topic",
+        ref: 'Topic',
       },
     ],
 
     tags: [
       {
         type: ObjectId,
-        ref: "Tag",
+        ref: 'Tag',
       },
     ],
 
     references: [
       {
         type: ObjectId,
-        ref: "Reference",
+        ref: 'Reference',
       },
     ],
 
     like: {
-      type: [{ type: ObjectId, ref: "User" }],
+      type: [{ type: ObjectId, ref: 'User' }],
     },
 
     postedBy: {
       type: ObjectId,
-      ref: "User",
+      ref: 'User',
     },
   },
   {
@@ -71,7 +72,7 @@ const blogSchema = new mongoose.Schema(
   }
 );
 
-const Blog = mongoose.model("Blog", blogSchema);
+const Blog = mongoose.model('Blog', blogSchema);
 
 module.exports = {
   Blog,

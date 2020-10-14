@@ -1,12 +1,12 @@
-const slugify = require("slug");
-const dotenv = require("dotenv");
-const fileType = require("file-type");
-const { v4: uuidv4 } = require("uuid");
-const AWS = require("aws-sdk");
+const slugify = require('slug');
+const dotenv = require('dotenv');
+const fileType = require('file-type');
+const { v4: uuidv4 } = require('uuid');
+const AWS = require('aws-sdk');
 
-const { Topic } = require("../models/Topic");
-const { Blog } = require("../models/Blog");
-const { Reference } = require("../models/Reference");
+const { Topic } = require('../models/Topic');
+const { Blog } = require('../models/Blog');
+const { Reference } = require('../models/Reference');
 
 dotenv.config();
 
@@ -20,39 +20,39 @@ exports.createTopic = async (req, res) => {
   const { name, description, image } = req.body;
 
   if (!name || name.length < 1)
-    return res.json({ error: "name is not defined..." });
+    return res.json({ error: 'name is not defined...' });
 
   if (!description || description.length < 0)
-    return res.json({ error: "description is not defined..." });
+    return res.json({ error: 'description is not defined...' });
 
   if (!image || image.length < 1)
-    return res.json({ error: "image is not defined..." });
+    return res.json({ error: 'image is not defined...' });
 
   const base64Data = new Buffer.from(
-    image.replace(/^data:image\/\w+;base64,/, ""),
-    "base64"
+    image.replace(/^data:image\/\w+;base64,/, ''),
+    'base64'
   );
 
   const slug = slugify(name).toLowerCase();
-  const type = image.split(";")[0].split("/")[1];
+  const type = image.split(';')[0].split('/')[1];
   const params = {
-    Bucket: "ose",
+    Bucket: 'ose',
     Key: `image/${uuidv4()}.${type}`,
     Body: base64Data,
-    ACL: "public-read",
-    ContentEncoding: "base64",
+    ACL: 'public-read',
+    ContentEncoding: 'base64',
     ContentType: `image/${type}`,
   };
 
   s3.upload(params, async (err, data) => {
-    let newTopic = new Topic({
+    const newTopic = new Topic({
       name: name.trim(),
       slug,
       description,
     });
 
-    if (err) res.status(400).json({ error: "Upload to S3 Failed..." });
-    console.log("AWS UPOLOAD RES DATA", data);
+    if (err) res.status(400).json({ error: 'Upload to S3 Failed...' });
+    console.log('AWS UPOLOAD RES DATA', data);
 
     newTopic.image.url = data.Location;
     newTopic.image.key = data.key;
@@ -74,7 +74,7 @@ exports.readTopic = async (req, res) => {
   const { slug } = req.params;
 
   try {
-    let singleTopic = await Topic.findOne({ slug });
+    const singleTopic = await Topic.findOne({ slug });
     if (!singleTopic) {
       return res.status(404).json({
         error: `${slug} topic not found...`,
@@ -93,7 +93,7 @@ exports.removeTopic = async (req, res) => {
   const { slug } = req.params;
 
   try {
-    let removedTopic = await Topic.findOneAndRemove({ slug });
+    const removedTopic = await Topic.findOneAndRemove({ slug });
     if (!removedTopic) {
       return res.status(404).json({
         error: `${slug} topic not found...`,
@@ -118,7 +118,7 @@ exports.readAllTopics = async (req, res) => {
     }
   } catch (error) {
     return res.status(400).json({
-      error: "Failed to load topics...",
+      error: 'Failed to load topics...',
     });
   }
 };

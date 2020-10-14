@@ -1,5 +1,6 @@
-const mongoose = require("mongoose");
-const dotenv = require("dotenv");
+const mongoose = require('mongoose');
+const dotenv = require('dotenv');
+
 dotenv.config();
 
 module.exports = function () {
@@ -14,6 +15,6 @@ module.exports = function () {
 
   mongoose
     .connect(DB, options)
-    .then(() => console.log("Connecting to DB..."))
-    .catch(() => console.log("Cannot Connect to DB..."));
+    .then(() => console.log('Connecting to DB...'))
+    .catch(() => console.log('Cannot Connect to DB...'));
 };

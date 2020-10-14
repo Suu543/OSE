@@ -1,5 +1,5 @@
-const Tag = require("../models/Tag");
-const slugify = require("slugify");
+const slugify = require('slugify');
+const { Tag } = require('../models/Tag');
 
 exports.createTag = async (req, res) => {
   const { name } = req.body;
@@ -22,7 +22,7 @@ exports.removeTag = async (req, res) => {
   const { slug } = req.params;
 
   try {
-    let removedTag = await Tag.findOneAndRemove({ slug });
+    const removedTag = await Tag.findOneAndRemove({ slug });
     if (removedTag) {
       return res.status(200).json({
         message: `${slug} is successfully deleted...`,
@@ -47,7 +47,7 @@ exports.readAllTags = async (req, res) => {
     }
   } catch (error) {
     return res.status(400).json({
-      error: "Failed to load tags...",
+      error: 'Failed to load tags...',
     });
   }
 };

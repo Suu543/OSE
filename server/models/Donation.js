@@ -1,31 +1,47 @@
-const mongoose = require("mongoose");
+// DonationID
+// Campaign Name - References Campaign Model
+// Amount
+// Date
+// Notes
+// DonerID - References User Model
+
+const mongoose = require('mongoose');
+
+const { ObjectId } = mongoose.Schema;
 
 const donationSchema = new mongoose.Schema({
-  organizationName: {
-    type: String,
-    required: true
+  campaign: {
+    type: ObjectId,
+    ref: 'Campaign',
   },
 
-  dollarAmount: {
+  amount: {
     type: Number,
-    required: true
+    required: true,
   },
 
-  comment: {
-    type: String
+  notes: {
+    type: String,
   },
 
-  created_date: {
-    type: Date,
-    default: Date.now
-  }
-},
-{
-  timestamps: true,
-}
-);
+  patron_email: {
+    type: String,
+  },
 
-const Donation = mongoose.model("Donation", donationSchema);
+  patron_name: {
+    type: String,
+  },
+
+  patron_address: {
+    type: String,
+  },
+
+  patron_phone: {
+    type: String,
+  },
+});
+
+const Donation = mongoose.model('Donation', donationSchema);
 
 module.exports = {
   Donation,
